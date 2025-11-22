@@ -1,0 +1,8 @@
+# List of source files containing translatable strings.
+# Please keep this file sorted alphabetically.
+data/io.github.redddfoxxyy.samaya.desktop.in
+data/io.github.redddfoxxyy.samaya.metainfo.xml.in
+data/io.github.redddfoxxyy.samaya.gschema.xml
+src/main.c
+src/samaya-window.c
+src/samaya-window.ui
