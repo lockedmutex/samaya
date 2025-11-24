@@ -1,5 +1,5 @@
-/* session.c
-*
+/* samaya-session.c
+ *
  * Copyright 2025 Suyog Tandel
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,8 +18,8 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-#include "timer.h"
-#include "session.h"
+#include "samaya-timer.h"
+#include "samaya-session.h"
 
 #include <stdio.h>
 
@@ -40,7 +40,7 @@ SessionManager *get_active_session_manager(void)
 	if (GLOBAL_SESSION_MANAGER_PTR) {
 		return GLOBAL_SESSION_MANAGER_PTR;
 	}
-	g_warning("Session Manager was accessed but is uninitialised!");
+	g_critical("Session Manager was accessed but is uninitialised!");
 	return GLOBAL_SESSION_MANAGER_PTR;
 }
 
@@ -49,9 +49,11 @@ SessionManager *get_active_session_manager(void)
  * Function Definitions
  * ============================================================================ */
 
-static void on_routine_completion(void);
+static void on_session_completion(void);
 
-static void play_completion_sound(void);
+static void play_completion_sound(GSoundContext *gSoundCTX);
+
+static void timer_tick_callback(void);
 
 void set_routine(WorkRoutine routine, SessionManager *session_manager);
 
@@ -60,11 +62,14 @@ void set_routine(WorkRoutine routine, SessionManager *session_manager);
  * SessionManager Methods
  * ============================================================================ */
 
-SessionManager *init_session_manager(guint16 sessions_to_complete, void (*count_update_callback)(gpointer user_data), gpointer user_data)
+SessionManager *init_session_manager(guint16 sessions_to_complete,
+                                     void (*timer_instance_tick_callback)(gpointer user_data),
+                                     gpointer user_data)
 {
 	SessionManager *sessionManager = g_new0(SessionManager, 1);
 
-	*sessionManager = (SessionManager){
+	*sessionManager = (SessionManager)
+	{
 		.work_duration = 0.1f,
 		.short_break_duration = 5.0f,
 		.long_break_duration = 20.0f,
@@ -81,8 +86,8 @@ SessionManager *init_session_manager(guint16 sessions_to_complete, void (*count_
 		.user_data = user_data,
 	};
 
-	sessionManager->timer_instance = init_timer(sessionManager->work_duration, play_completion_sound, on_routine_completion,
-	                                            count_update_callback, user_data);
+	sessionManager->timer_instance = init_timer(sessionManager->work_duration, on_session_completion, timer_tick_callback);
+	sessionManager->timer_instance_tick_callback = timer_instance_tick_callback;
 
 	GLOBAL_SESSION_MANAGER_PTR = sessionManager;
 	return sessionManager;
@@ -101,9 +106,21 @@ void deinit_session_manager(SessionManager *session_manager)
 	free(session_manager);
 }
 
-static void on_routine_completion(void)
+static void timer_tick_callback(void)
 {
 	SessionManager *session_manager = get_active_session_manager();
+	if (!session_manager) {
+		g_critical("Session Manager has not been Initialised yet! Failed to update timer tick!");
+		return;
+	}
+
+	session_manager->timer_instance_tick_callback(session_manager->user_data);
+}
+
+static void on_session_completion(void)
+{
+	SessionManager *session_manager = get_active_session_manager();
+	play_completion_sound(session_manager->gsound_ctx);
 
 	switch (session_manager->current_routine) {
 		case Working:
@@ -130,14 +147,9 @@ static void on_routine_completion(void)
 	set_routine(session_manager->current_routine, session_manager);
 }
 
-static void play_completion_sound(void)
+static void play_completion_sound(GSoundContext *gSoundCTX)
 {
-	GSoundContext *gSoundCTX = NULL;
-	SessionManager *session_manager = get_active_session_manager();
-
-	if (session_manager && session_manager->gsound_ctx) {
-		gSoundCTX = GLOBAL_SESSION_MANAGER_PTR->gsound_ctx;
-	} else {
+	if (!gSoundCTX) {
 		g_warning("Failed to play completion sound, gSound Context is not set.");
 		return;
 	}
@@ -156,7 +168,6 @@ static void play_completion_sound(void)
 		g_error_free(error);
 	}
 }
-
 
 void set_routine(WorkRoutine routine, SessionManager *session_manager)
 {
@@ -178,5 +189,30 @@ void set_routine(WorkRoutine routine, SessionManager *session_manager)
 
 	set_timer_initial_time_minutes(timer, duration);
 
-	update_timer_string_and_run_callback(timer);
+	update_timer_string_and_run_tick_callback(timer);
 }
+
+void set_timer_instance_tick_callback(void (*timer_instance_tick_callback)(gpointer user_data))
+{
+	SessionManager *session_manager = get_active_session_manager();
+	if (!session_manager) {
+		g_critical("Session Manager has not been Initialised yet! Failed to set tick update callback.");
+		return;
+	}
+
+	session_manager->timer_instance_tick_callback = timer_instance_tick_callback;
+}
+
+
+void set_timer_instance_tick_callback_with_data(void (*timer_instance_tick_callback)(gpointer user_data), gpointer user_data)
+{
+	SessionManager *session_manager = get_active_session_manager();
+	if (!session_manager) {
+		g_critical("Session Manager has not been Initialised yet! Failed to set tick update callback and user data.");
+		return;
+	}
+
+	session_manager->timer_instance_tick_callback = timer_instance_tick_callback;
+	session_manager->user_data = user_data;
+}
+

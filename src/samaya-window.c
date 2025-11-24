@@ -21,18 +21,22 @@
 #include "config.h"
 
 #include "samaya-window.h"
-#include "timer.h"
+#include "samaya-timer.h"
 #include <math.h>
 #include "samaya-application.h"
+#include "samaya-session.h"
 
 struct _SamayaWindow
 {
 	AdwApplicationWindow parent_instance;
 
+	GtkBox *routine_switch_toggle_group;
+
 	GtkLabel *timer_label;
+	GtkDrawingArea *progress_circle;
+
 	GtkButton *start_button;
 	GtkButton *reset_button;
-	GtkDrawingArea *progress_circle;
 };
 
 G_DEFINE_FINAL_TYPE(SamayaWindow, samaya_window, ADW_TYPE_APPLICATION_WINDOW)
@@ -171,7 +175,7 @@ samaya_window_realize(GtkWidget *widget)
 	GTK_WIDGET_CLASS(samaya_window_parent_class)->realize(widget);
 
 	Timer *timer = get_timer(self);
-	set_count_update_callback(timer, schedule_timer_label_update);
+	set_timer_instance_tick_callback(schedule_timer_label_update);
 	gtk_label_set_text(self->timer_label, get_time_str(timer));
 }
 

@@ -1,4 +1,4 @@
-/* timer.h
+/* samaya-timer.h
  *
  * Copyright 2025 Suyog Tandel
  *
@@ -36,31 +36,23 @@ typedef struct
 	gint64 last_updated_time_us;
 	gfloat timer_progress;
 	GString *remaining_time_minutes_string;
-	gboolean is_timer_completion_audio_played;
 
 	GThread *worker_thread;
 	guint tick_interval_ms;
 
-	gpointer user_data;
-
-	// CallBack API to react when timer is updated.
-	void (*count_update_callback)(gpointer user_data);
-
-	// Callback to function that plays completion sound.
-	void (*play_completion_sound)(void);
+	// CallBack API to react on every second tick.
+	void (*timer_tick_callback)(void);
 
 	// Callback to function that will be executed on completion of the set timer.
-	void (*on_timer_completion)(void);
+	void (*timer_completion_callback)(void);
 } Timer;
 
 
 Timer *get_active_timer(void);
 
 Timer *init_timer(float duration_minutes,
-                  void (*play_completion_sound)(void),
                   void (*on_finished)(void),
-                  void (*count_update_callback)(gpointer user_data),
-                  gpointer user_data);
+                  void (*timer_tick_callback)(void));
 
 void timer_start(Timer *timer);
 
@@ -78,7 +70,7 @@ void unlock_timer(Timer *timer);
 
 void decrement_remaining_time_ms(Timer *timer, gint64 elapsed_time_ms);
 
-void update_timer_string_and_run_callback(Timer *timer);
+void update_timer_string_and_run_tick_callback(Timer *timer);
 
 gboolean get_is_timer_running(Timer *timer);
 
@@ -88,8 +80,6 @@ gchar *get_time_str(Timer *timer);
 
 void set_timer_initial_time_minutes(Timer *timer, gfloat initial_time_minutes);
 
-void set_timer_thread(Timer *timer, GThread *timerThread);
+void set_timer_thread(Timer *timer, GThread *timer_thread);
 
-void set_count_update_callback(Timer *timer, void (*count_update_callback)(gpointer user_data));
 
-void set_count_update_callback_with_data(Timer *timer, void (*count_update_callback)(gpointer user_data), gpointer user_data);

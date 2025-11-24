@@ -23,8 +23,8 @@
 
 #include "samaya-application.h"
 #include "samaya-window.h"
-#include "timer.h"
-#include "session.h"
+#include "samaya-timer.h"
+#include "samaya-session.h"
 
 struct _SamayaApplication
 {
