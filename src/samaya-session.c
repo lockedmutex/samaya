@@ -49,7 +49,7 @@ SessionManager *get_active_session_manager(void)
  * Function Definitions
  * ============================================================================ */
 
-static void on_session_completion(void);
+static void on_session_completion(gboolean play_sound);
 
 static void play_completion_sound(GSoundContext *gSoundCTX);
 
@@ -103,7 +103,7 @@ void deinit_session_manager(SessionManager *session_manager)
 
 	GLOBAL_SESSION_MANAGER_PTR = NULL;
 
-	free(session_manager);
+	g_free(session_manager);
 }
 
 static void timer_tick_callback(void)
@@ -117,10 +117,12 @@ static void timer_tick_callback(void)
 	g_idle_add(session_manager->timer_instance_tick_callback, session_manager->user_data);
 }
 
-static void on_session_completion(void)
+static void on_session_completion(gboolean play_sound)
 {
 	SessionManager *session_manager = get_active_session_manager();
-	play_completion_sound(session_manager->gsound_ctx);
+	if (play_sound) {
+		play_completion_sound(session_manager->gsound_ctx);
+	}
 
 	switch (session_manager->current_routine) {
 		case Working:
@@ -146,6 +148,11 @@ static void on_session_completion(void)
 	}
 
 	set_routine(session_manager->current_routine, session_manager);
+}
+
+void skip_current_session(void)
+{
+	on_session_completion(FALSE);
 }
 
 static void play_completion_sound(GSoundContext *gSoundCTX)

@@ -69,7 +69,7 @@ static void timer_hold_worker(Timer *timer);
  * ============================================================================ */
 
 Timer *init_timer(float duration_minutes,
-                  void (*on_finished)(void),
+                  void (*on_finished)(gboolean play_sound),
                   void (*timer_tick_callback)(void))
 {
 	Timer *timer = g_new0(Timer, 1);
@@ -135,7 +135,7 @@ static gpointer timer_thread_worker(gpointer timerInstance)
 			unlock_timer(timer);
 
 			if (timer->timer_completion_callback) {
-				timer->timer_completion_callback();
+				timer->timer_completion_callback(TRUE);
 			}
 
 			lock_timer(timer);
@@ -214,7 +214,7 @@ void deinit_timer(Timer *timer)
 	g_mutex_clear(&timer->timer_mutex);
 	GLOBAL_TIMER_PTR = NULL;
 
-	free(timer);
+	g_free(timer);
 }
 
 

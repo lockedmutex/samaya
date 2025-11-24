@@ -46,14 +46,14 @@ typedef struct
 	void (*timer_tick_callback)(void);
 
 	// Callback to function that will be executed on completion of the set timer.
-	void (*timer_completion_callback)(void);
+	void (*timer_completion_callback)(gboolean play_sound);
 } Timer;
 
 
 Timer *get_active_timer(void);
 
 Timer *init_timer(float duration_minutes,
-                  void (*on_finished)(void),
+                  void (*on_finished)(gboolean play_sound),
                   void (*timer_tick_callback)(void));
 
 void timer_start(Timer *timer);

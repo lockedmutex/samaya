@@ -46,19 +46,19 @@ G_DEFINE_FINAL_TYPE(SamayaWindow, samaya_window, ADW_TYPE_APPLICATION_WINDOW)
  * Function Definitions
  * ============================================================================ */
 
-static void
-draw_progress_circle(GtkDrawingArea *area,
-                     cairo_t *cr,
-                     int width,
-                     int height,
-                     gpointer user_data);
+static void draw_progress_circle(GtkDrawingArea *area,
+                                 cairo_t *cr,
+                                 int width,
+                                 int height,
+                                 gpointer user_data);
+
+static void update_secondary_button_mode(SamayaWindow *self, gboolean is_running);
 
 /* ============================================================================
  * Timer Helpers
  * ============================================================================ */
 
-static Timer *
-get_timer(SamayaWindow *self)
+static Timer *get_timer(SamayaWindow *self)
 {
 	SamayaApplication *app = SAMAYA_APPLICATION(gtk_window_get_application(GTK_WINDOW(self)));
 	return samaya_application_get_timer(app);
@@ -112,6 +112,8 @@ static gboolean update_timer_label(gpointer user_data)
 		gtk_button_set_label(self->start_button, "Start");
 		gtk_widget_remove_css_class(GTK_WIDGET(self->start_button), "warning");
 		gtk_widget_add_css_class(GTK_WIDGET(self->start_button), "suggested-action");
+
+		update_secondary_button_mode(self, FALSE);
 	}
 
 	return G_SOURCE_REMOVE;
@@ -145,10 +147,28 @@ static gboolean update_routine_toggle_switch(gpointer user_data)
 	return G_SOURCE_REMOVE;
 }
 
-static void
-on_press_start(GtkWidget *widget,
-               const char *action_name,
-               GVariant *param)
+static void update_secondary_button_mode(SamayaWindow *self, gboolean is_running)
+{
+	if (is_running) {
+		gtk_button_set_label(self->reset_button, NULL);
+		gtk_button_set_icon_name(self->reset_button, "media-skip-forward-symbolic");
+
+		gtk_widget_set_tooltip_text(GTK_WIDGET(self->reset_button), "Skip Session");
+
+		gtk_actionable_set_action_name(GTK_ACTIONABLE(self->reset_button), "win.skip-session");
+		gtk_widget_remove_css_class(GTK_WIDGET(self->reset_button), "destructive-action");
+	} else {
+		gtk_button_set_label(self->reset_button, "Reset");
+		gtk_widget_set_tooltip_text(GTK_WIDGET(self->reset_button), "Reset Timer");
+
+		gtk_actionable_set_action_name(GTK_ACTIONABLE(self->reset_button), "win.reset-timer");
+		gtk_widget_add_css_class(GTK_WIDGET(self->reset_button), "destructive-action");
+	}
+}
+
+static void on_press_start(GtkWidget *widget,
+                           const char *action_name,
+                           GVariant *param)
 {
 	SamayaWindow *self = SAMAYA_WINDOW(widget);
 
@@ -161,23 +181,41 @@ on_press_start(GtkWidget *widget,
 		gtk_button_set_label(self->start_button, "Resume");
 		gtk_widget_remove_css_class(GTK_WIDGET(self->start_button), "warning");
 		gtk_widget_add_css_class(GTK_WIDGET(self->start_button), "suggested-action");
+
+		update_secondary_button_mode(self, FALSE);
 	} else {
 		timer_start(timer);
 		gtk_button_set_label(self->start_button, "Pause");
 		gtk_widget_remove_css_class(GTK_WIDGET(self->start_button), "suggested-action");
 		gtk_widget_remove_css_class(GTK_WIDGET(self->start_button), "warning");
+
+		update_secondary_button_mode(self, TRUE);
 	}
 }
 
-static void
-on_press_reset(GtkWidget *widget,
-               const char *action_name,
-               GVariant *param)
+static void on_press_reset(GtkWidget *widget,
+                           const char *action_name,
+                           GVariant *param)
 {
 	SamayaWindow *self = SAMAYA_WINDOW(widget);
 
 	timer_reset(get_timer(self));
 
+	gtk_button_set_label(self->start_button, "Start");
+	gtk_widget_remove_css_class(GTK_WIDGET(self->start_button), "warning");
+	gtk_widget_add_css_class(GTK_WIDGET(self->start_button), "suggested-action");
+}
+
+static void on_press_skip(GtkWidget *widget,
+                          const char *action_name,
+                          GVariant *param)
+{
+	SamayaWindow *self = SAMAYA_WINDOW(widget);
+
+	// This will increment the count (if working) and switch to the next routine
+	skip_current_session();
+
+	// Ensure button state is correct (Start/Pause button reset)
 	gtk_button_set_label(self->start_button, "Start");
 	gtk_widget_remove_css_class(GTK_WIDGET(self->start_button), "warning");
 	gtk_widget_add_css_class(GTK_WIDGET(self->start_button), "suggested-action");
@@ -256,6 +294,7 @@ samaya_window_class_init(SamayaWindowClass *klass)
 
 	gtk_widget_class_install_action(widget_class, "win.start-timer", NULL, on_press_start);
 	gtk_widget_class_install_action(widget_class, "win.reset-timer", NULL, on_press_reset);
+	gtk_widget_class_install_action(widget_class, "win.skip-session", NULL, on_press_skip);
 }
 
 static void

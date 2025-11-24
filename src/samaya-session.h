@@ -62,6 +62,8 @@ void deinit_session_manager(SessionManager *session_manager);
 
 void set_routine(WorkRoutine routine, SessionManager *session_manager);
 
+void skip_current_session(void);
+
 void set_timer_instance_tick_callback(gboolean (*timer_instance_tick_callback)(gpointer));
 
 void set_timer_instance_tick_callback_with_data(gboolean (*timer_instance_tick_callback)(gpointer), gpointer user_data);
