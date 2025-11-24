@@ -21,6 +21,8 @@
 #pragma once
 
 #include <adwaita.h>
+
+#include "samaya-session.h"
 #include "samaya-timer.h"
 
 G_BEGIN_DECLS
@@ -33,5 +35,7 @@ SamayaApplication *samaya_application_new(const char *application_id,
                                           GApplicationFlags flags);
 
 Timer *samaya_application_get_timer(SamayaApplication *self);
+
+SessionManager *samaya_application_get_session_manager(SamayaApplication *self);
 
 G_END_DECLS

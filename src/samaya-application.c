@@ -157,3 +157,8 @@ Timer *samaya_application_get_timer(SamayaApplication *self)
 	// return self->samayaApplicationTimer;
 	return self->samayaSessionManager->timer_instance;
 }
+
+SessionManager *samaya_application_get_session_manager(SamayaApplication *self)
+{
+	return self->samayaSessionManager;
+}

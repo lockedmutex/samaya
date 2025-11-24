@@ -27,8 +27,10 @@
 typedef struct
 {
 	GMutex timer_mutex;
+	GCond timer_cond;
 
-	bool is_running;
+	gboolean is_running;
+	gboolean end_worker;
 
 	// ms suffix means Milli Seconds and us means micro Seconds.
 	gint64 initial_time_ms;

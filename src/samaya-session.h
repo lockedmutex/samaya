@@ -49,19 +49,22 @@ typedef struct
 
 	gpointer user_data;
 
-	void (*timer_instance_tick_callback)(gpointer user_data);
+	gboolean (*timer_instance_tick_callback)(gpointer user_data);
+
+	gboolean (*routine_update_callback)(gpointer user_data);
 } SessionManager;
 
 SessionManager *get_active_session_manager(void);
 
-SessionManager *init_session_manager(guint16 sessions_to_complete, void (*timer_instance_tick_callback)(gpointer user_data),
-                                     gpointer user_data);
+SessionManager *init_session_manager(guint16 sessions_to_complete, gboolean (*timer_instance_tick_callback)(gpointer), gpointer user_data);
 
 void deinit_session_manager(SessionManager *session_manager);
 
 void set_routine(WorkRoutine routine, SessionManager *session_manager);
 
-void set_timer_instance_tick_callback(void (*timer_instance_tick_callback)(gpointer user_data));
+void set_timer_instance_tick_callback(gboolean (*timer_instance_tick_callback)(gpointer));
 
-void set_timer_instance_tick_callback_with_data(void (*timer_instance_tick_callback)(gpointer user_data), gpointer user_data);
+void set_timer_instance_tick_callback_with_data(gboolean (*timer_instance_tick_callback)(gpointer), gpointer user_data);
+
+void set_routine_update_callback(gboolean (*routine_update_callback)(gpointer));
 

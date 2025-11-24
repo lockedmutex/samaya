@@ -95,8 +95,7 @@ static void on_routine_changed(AdwToggleGroup *toggle_group,
 	gtk_widget_add_css_class(GTK_WIDGET(self->start_button), "suggested-action");
 }
 
-static gboolean
-update_timer_label(gpointer user_data)
+static gboolean update_timer_label(gpointer user_data)
 {
 	SamayaApplication *app = SAMAYA_APPLICATION(user_data);
 	GtkWindow *window = gtk_application_get_active_window(GTK_APPLICATION(app));
@@ -118,11 +117,32 @@ update_timer_label(gpointer user_data)
 	return G_SOURCE_REMOVE;
 }
 
-static void
-schedule_timer_label_update(gpointer user_data)
+static gboolean update_routine_toggle_switch(gpointer user_data)
 {
-	// As we cannot touch GtkWidgets here. We schedule it for the main thread...
-	g_idle_add(update_timer_label, user_data);
+	SamayaApplication *app = SAMAYA_APPLICATION(user_data);
+	GtkWindow *window = gtk_application_get_active_window(GTK_APPLICATION(app));
+	SamayaWindow *self = SAMAYA_WINDOW(window);
+
+	WorkRoutine new_routine = samaya_application_get_session_manager(app)->current_routine;
+
+	const char *target_name = NULL;
+
+	switch (new_routine) {
+		case Working: target_name = "pomodoro";
+			break;
+		case ShortBreak: target_name = "short-break";
+			break;
+		case LongBreak: target_name = "long-break";
+			break;
+	}
+
+	if (target_name) {
+		g_signal_handlers_block_by_func(self->routine_toggle_group, on_routine_changed, self);
+		adw_toggle_group_set_active_name(self->routine_toggle_group, target_name);
+		g_signal_handlers_unblock_by_func(self->routine_toggle_group, on_routine_changed, self);
+	}
+
+	return G_SOURCE_REMOVE;
 }
 
 static void
@@ -209,8 +229,10 @@ samaya_window_realize(GtkWidget *widget)
 
 	GTK_WIDGET_CLASS(samaya_window_parent_class)->realize(widget);
 
+	set_timer_instance_tick_callback(update_timer_label);
+	set_routine_update_callback(update_routine_toggle_switch);
+
 	Timer *timer = get_timer(self);
-	set_timer_instance_tick_callback(schedule_timer_label_update);
 	gtk_label_set_text(self->timer_label, get_time_str(timer));
 }
 
