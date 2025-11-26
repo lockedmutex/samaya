@@ -18,10 +18,10 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-#include "samaya-timer.h"
 #include "samaya-session.h"
-
+#include "samaya-timer.h"
 #include <stdio.h>
+
 
 /* ============================================================================
  * Static Variables
@@ -55,8 +55,6 @@ static void play_completion_sound(GSoundContext *gSoundCTX);
 
 static void timer_tick_callback(void);
 
-void sm_set_routine(RoutineType routine, SessionManager *session_manager);
-
 
 /* ============================================================================
  * SessionManager Methods
@@ -68,8 +66,7 @@ SessionManager *sm_init(guint16 sessions_to_complete,
 {
 	SessionManager *sessionManager = g_new0(SessionManager, 1);
 
-	*sessionManager = (SessionManager)
-	{
+	*sessionManager = (SessionManager){
 		.work_duration = 25.0f,
 		.short_break_duration = 5.0f,
 		.long_break_duration = 20.0f,
@@ -168,8 +165,7 @@ static void play_completion_sound(GSoundContext *gSoundCTX)
 		NULL, // no cancellable
 		&error,
 		GSOUND_ATTR_EVENT_ID, "bell-terminal",
-		NULL
-	);
+		NULL);
 
 	if (!ok) {
 		g_warning("Failed to play sound: %s", error->message);
@@ -266,7 +262,6 @@ void sm_set_timer_tick_callback(gboolean (*timer_instance_tick_callback)(gpointe
 
 	session_manager->sm_timer_tick_callback = timer_instance_tick_callback;
 }
-
 
 void sm_set_timer_tick_callback_with_data(gboolean (*timer_instance_tick_callback)(gpointer user_data), gpointer user_data)
 {
