@@ -1,4 +1,15 @@
+# IDE related dirs:
 .idea/
 .vscode/
 .buildconfig
 /io.github.redddfoxxyy.samaya.json
+
+# Flatpak Build cache:
+build-aux/flatpak/.flatpak-builder
+build-aux/flatpak/build-dir
+build-aux/flatpak/repo
+build-aux/flatpak/samaya.flatpak
+
+# Meson Build Output Cache:
+buildDir
+_build

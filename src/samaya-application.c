@@ -141,9 +141,10 @@ samaya_application_about_action(GSimpleAction *action,
 	                      "application-icon", "io.github.redddfoxxyy.samaya",
 	                      "developer-name", "Suyog Tandel",
 	                      "translator-credits", _("translator-credits"),
-	                      "version", "0.1.0",
+	                      "version", "0.1.1",
 	                      "developers", developers,
 	                      "copyright", "© 2025 Suyog Tandel",
+						  "license-type", GTK_LICENSE_AGPL_3_0,
 	                      NULL);
 }
 
