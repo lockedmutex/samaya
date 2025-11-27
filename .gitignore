@@ -3,6 +3,7 @@
 .vscode/
 .buildconfig
 /io.github.redddfoxxyy.samaya.json
+/io.github.redddfoxxyy.samaya.json~
 
 # Flatpak Build cache:
 build-aux/flatpak/.flatpak-builder

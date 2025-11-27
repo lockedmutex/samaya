@@ -20,7 +20,8 @@
 
 ## Download & Installation
 
-- As of now the app can only be compiled and installed manually from source.
+- Flatpak builds for linux are available in [latest release](https://github.com/RedddFoxxyy/samaya/releases/latest).
+- For other operating systems, the app can only be compiled and installed manually from source.
 
 ## License
 
