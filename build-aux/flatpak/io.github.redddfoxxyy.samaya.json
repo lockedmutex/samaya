@@ -50,8 +50,7 @@
 				{
 					"type": "git",
 					"url": "https://github.com/RedddFoxxyy/samaya.git",
-					"commit": "da62c0309f07163a8ba4c2027ef5473f3a7deede",
-					"tag": "0.1.1"
+					"branch": "main"
 				}
 			],
 			"config-opts": ["--buildtype=release"]

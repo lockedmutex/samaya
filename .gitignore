@@ -11,8 +11,15 @@ build-aux/flatpak/.flatpak-builder
 build-aux/flatpak/build-dir
 build-aux/flatpak/repo
 build-aux/flatpak/samaya.flatpak
+/repo
+/build-dir
+/.flatpak-builder
+
+# AppImage Build cache:
+build-aux/appimage/
 
 # Meson Build Output Cache:
 buildDir
 builddir
 _build
+build
