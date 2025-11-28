@@ -34,7 +34,7 @@
 		{
 			"name": "gsound",
 			"buildsystem": "meson",
-			"config-opts": ["--buildtype=release"],
+			"config-opts": ["--buildtype=release", "--libdir=/app/lib"],
 			"sources": [
 				{
 					"type": "archive",
