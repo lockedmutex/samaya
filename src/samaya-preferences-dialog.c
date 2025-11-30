@@ -36,10 +36,10 @@ G_DEFINE_FINAL_TYPE(SamayaPreferencesDialog, samaya_preferences_dialog, ADW_TYPE
 
 static void on_work_duration_changed(GtkAdjustment *adjustment)
 {
-    SessionManager *sm = sm_get_global_ptr();
-    if (sm) {
+    SessionManagerPtr session_manager = sm_get_global();
+    if (session_manager) {
         gdouble val = gtk_adjustment_get_value(adjustment);
-        sm_set_work_duration(sm, val);
+        sm_set_work_duration(session_manager, val);
 
         GSettings *settings = g_settings_new("io.github.redddfoxxyy.samaya");
         g_settings_set_double(settings, "work-duration", val);
@@ -49,10 +49,10 @@ static void on_work_duration_changed(GtkAdjustment *adjustment)
 
 static void on_short_break_changed(GtkAdjustment *adjustment)
 {
-    SessionManager *sm = sm_get_global_ptr();
-    if (sm) {
+    SessionManagerPtr session_manager = sm_get_global();
+    if (session_manager) {
         gdouble val = gtk_adjustment_get_value(adjustment);
-        sm_set_short_break_duration(sm, val);
+        sm_set_short_break_duration(session_manager, val);
 
         GSettings *settings = g_settings_new("io.github.redddfoxxyy.samaya");
         g_settings_set_double(settings, "short-break-duration", val);
@@ -62,10 +62,10 @@ static void on_short_break_changed(GtkAdjustment *adjustment)
 
 static void on_long_break_changed(GtkAdjustment *adjustment)
 {
-    SessionManager *sm = sm_get_global_ptr();
-    if (sm) {
+    SessionManagerPtr session_manager = sm_get_global();
+    if (session_manager) {
         gdouble val = gtk_adjustment_get_value(adjustment);
-        sm_set_long_break_duration(sm, val);
+        sm_set_long_break_duration(session_manager, val);
 
         GSettings *settings = g_settings_new("io.github.redddfoxxyy.samaya");
         g_settings_set_double(settings, "long-break-duration", val);
@@ -75,10 +75,10 @@ static void on_long_break_changed(GtkAdjustment *adjustment)
 
 static void on_sessions_count_changed(GtkAdjustment *adjustment)
 {
-    SessionManager *sm = sm_get_global_ptr();
-    if (sm) {
+    SessionManagerPtr session_manager = sm_get_global();
+    if (session_manager) {
         guint16 val = (guint16) gtk_adjustment_get_value(adjustment);
-        sm_set_sessions_to_complete(sm, val);
+        sm_set_sessions_to_complete(session_manager, val);
 
         GSettings *settings = g_settings_new("io.github.redddfoxxyy.samaya");
         GVariant *variant = g_variant_new_uint16(val);
@@ -98,7 +98,7 @@ static void samaya_preferences_dialog_class_init(SamayaPreferencesDialogClass *k
 
 static void samaya_preferences_dialog_init(SamayaPreferencesDialog *self)
 {
-    SessionManager *sm = sm_get_global_ptr();
+    SessionManagerPtr session_manager = sm_get_global();
 
     AdwPreferencesPage *page = ADW_PREFERENCES_PAGE(adw_preferences_page_new());
 
@@ -115,7 +115,8 @@ static void samaya_preferences_dialog_init(SamayaPreferencesDialog *self)
     // Work Duration
     GtkWidget *work_row = adw_spin_row_new_with_range(0.5, 999.0, 0.5);
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(work_row), _("Work"));
-    adw_spin_row_set_value(ADW_SPIN_ROW(work_row), sm ? sm->work_duration : 25.0);
+    adw_spin_row_set_value(ADW_SPIN_ROW(work_row),
+                           session_manager ? session_manager->work_duration : 25.0);
     g_signal_connect(adw_spin_row_get_adjustment(ADW_SPIN_ROW(work_row)), "value-changed",
                      G_CALLBACK(on_work_duration_changed), NULL);
     adw_preferences_group_add(timer_group, work_row);
@@ -123,7 +124,8 @@ static void samaya_preferences_dialog_init(SamayaPreferencesDialog *self)
     // Short Break Duration
     GtkWidget *short_row = adw_spin_row_new_with_range(0.5, 999.0, 0.5);
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(short_row), _("Short Break"));
-    adw_spin_row_set_value(ADW_SPIN_ROW(short_row), sm ? sm->short_break_duration : 5.0);
+    adw_spin_row_set_value(ADW_SPIN_ROW(short_row),
+                           session_manager ? session_manager->short_break_duration : 5.0);
     g_signal_connect(adw_spin_row_get_adjustment(ADW_SPIN_ROW(short_row)), "value-changed",
                      G_CALLBACK(on_short_break_changed), NULL);
     adw_preferences_group_add(timer_group, short_row);
@@ -131,7 +133,8 @@ static void samaya_preferences_dialog_init(SamayaPreferencesDialog *self)
     // Long Break Duration
     GtkWidget *long_row = adw_spin_row_new_with_range(0.5, 999.0, 0.5);
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(long_row), _("Long Break"));
-    adw_spin_row_set_value(ADW_SPIN_ROW(long_row), sm ? sm->long_break_duration : 20.0);
+    adw_spin_row_set_value(ADW_SPIN_ROW(long_row),
+                           session_manager ? session_manager->long_break_duration : 20.0);
     g_signal_connect(adw_spin_row_get_adjustment(ADW_SPIN_ROW(long_row)), "value-changed",
                      G_CALLBACK(on_long_break_changed), NULL);
     adw_preferences_group_add(timer_group, long_row);
@@ -145,7 +148,8 @@ static void samaya_preferences_dialog_init(SamayaPreferencesDialog *self)
     // Session Count
     GtkWidget *count_row = adw_spin_row_new_with_range(1.0, 100.0, 1.0);
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(count_row), _("Sessions before Long Break"));
-    adw_spin_row_set_value(ADW_SPIN_ROW(count_row), sm ? sm->sessions_to_complete : 4.0);
+    adw_spin_row_set_value(ADW_SPIN_ROW(count_row),
+                           session_manager ? session_manager->sessions_to_complete : 4.0);
     g_signal_connect(adw_spin_row_get_adjustment(ADW_SPIN_ROW(count_row)), "value-changed",
                      G_CALLBACK(on_sessions_count_changed), NULL);
     adw_preferences_group_add(session_group, count_row);

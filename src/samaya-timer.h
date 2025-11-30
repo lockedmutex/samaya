@@ -48,8 +48,10 @@ typedef struct
     void (*tm_completion_callback)(gboolean play_sound);
 } Timer;
 
+typedef Timer *TimerPtr;
 
-Timer *tm_get_global_ptr(void);
+
+Timer *tm_get_global(void);
 
 Timer *tm_init(float duration_minutes, void (*on_finished)(gboolean play_sound),
                void (*timer_tick_callback)(void));

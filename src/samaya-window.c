@@ -46,23 +46,13 @@ G_DEFINE_FINAL_TYPE(SamayaWindow, samaya_window, ADW_TYPE_APPLICATION_WINDOW)
  * Function Definitions
  * ============================================================================ */
 
-static void on_routine_changed(AdwToggleGroup *toggle_group, GParamSpec *pspec,
-                               gpointer samaya_window);
+static void handle_routine_change(AdwToggleGroup *toggle_group, GParamSpec *pspec,
+                                  gpointer samaya_window);
 
 static void draw_progress_circle(GtkDrawingArea *area, cairo_t *cr, int width, int height,
                                  gpointer user_data);
 
-static void update_control_buttons(SamayaWindow *self);
-
-/* ============================================================================
- * Timer Helpers
- * ============================================================================ */
-
-static Timer *get_timer_instance(SamayaWindow *self)
-{
-    SamayaApplication *app = SAMAYA_APPLICATION(gtk_window_get_application(GTK_WINDOW(self)));
-    return samaya_application_get_timer(app);
-}
+static void ui_update_control_buttons(SamayaWindow *self);
 
 
 /* ============================================================================
@@ -72,15 +62,14 @@ static Timer *get_timer_instance(SamayaWindow *self)
 
 static void update_progress_circle_color(SamayaWindow *self)
 {
-    SamayaApplication *app = SAMAYA_APPLICATION(gtk_window_get_application(GTK_WINDOW(self)));
-    SessionManager *sm = samaya_application_get_session_manager(app);
+    SessionManagerPtr session_manager = sm_get_global();
     GtkWidget *widget = GTK_WIDGET(self->progress_circle);
 
     gtk_widget_remove_css_class(widget, "routine-working");
     gtk_widget_remove_css_class(widget, "routine-short-break");
     gtk_widget_remove_css_class(widget, "routine-long-break");
 
-    switch (sm->current_routine) {
+    switch (session_manager->current_routine) {
         case Working:
             gtk_widget_add_css_class(widget, "routine-working");
             break;
@@ -99,21 +88,22 @@ static void update_progress_circle_color(SamayaWindow *self)
     gtk_widget_queue_draw(widget);
 }
 
-static gboolean update_timer_label(gpointer user_data)
+static gboolean ui_update_timer_label(gpointer user_data)
 {
     SamayaApplication *app = SAMAYA_APPLICATION(user_data);
     GtkWindow *window = gtk_application_get_active_window(GTK_APPLICATION(app));
     SamayaWindow *self = SAMAYA_WINDOW(window);
 
-    Timer *timer = samaya_application_get_timer(app);
+    TimerPtr timer = tm_get_global();
 
-    if (timer) {
+    if (timer != NULL) {
         gtk_label_set_text(self->timer_label, tm_get_time_str(timer));
         gtk_widget_queue_draw(GTK_WIDGET(self->progress_circle));
     }
 
-    SessionManager *session_manager = samaya_application_get_session_manager(app);
-    if (session_manager) {
+    SessionManagerPtr session_manager = sm_get_global();
+
+    if (session_manager != NULL) {
         char *session_text =
             g_strdup_printf("#%" G_GUINT64_FORMAT, session_manager->total_sessions_counted);
 
@@ -122,23 +112,19 @@ static gboolean update_timer_label(gpointer user_data)
     }
 
     if (!tm_get_is_running(timer)) {
-        // gtk_button_set_label(self->start_button, _("Start"));
-        // gtk_widget_remove_css_class(GTK_WIDGET(self->start_button), "warning");
-        // gtk_widget_add_css_class(GTK_WIDGET(self->start_button), "suggested-action");
-
-        update_control_buttons(self);
+        ui_update_control_buttons(self);
     }
 
     return G_SOURCE_REMOVE;
 }
 
-static gboolean update_routine_toggle_switch(gpointer user_data)
+static gboolean ui_update_routine_toggle_switch(gpointer user_data)
 {
     SamayaApplication *app = SAMAYA_APPLICATION(user_data);
     GtkWindow *window = gtk_application_get_active_window(GTK_APPLICATION(app));
     SamayaWindow *self = SAMAYA_WINDOW(window);
 
-    RoutineType current_routine = samaya_application_get_session_manager(app)->current_routine;
+    RoutineType current_routine = sm_get_global()->current_routine;
 
     const char *target_name = NULL;
 
@@ -159,9 +145,9 @@ static gboolean update_routine_toggle_switch(gpointer user_data)
     }
 
     if (target_name) {
-        g_signal_handlers_block_by_func(self->routine_toggle_group, on_routine_changed, self);
+        g_signal_handlers_block_by_func(self->routine_toggle_group, handle_routine_change, self);
         adw_toggle_group_set_active_name(self->routine_toggle_group, target_name);
-        g_signal_handlers_unblock_by_func(self->routine_toggle_group, on_routine_changed, self);
+        g_signal_handlers_unblock_by_func(self->routine_toggle_group, handle_routine_change, self);
 
         update_progress_circle_color(self);
     }
@@ -169,9 +155,9 @@ static gboolean update_routine_toggle_switch(gpointer user_data)
     return G_SOURCE_REMOVE;
 }
 
-static void update_control_buttons(SamayaWindow *self)
+static void ui_update_control_buttons(SamayaWindow *self)
 {
-    Timer *timer = get_timer_instance(self);
+    TimerPtr timer = tm_get_global();
     GtkWidget *start_btn_widget = GTK_WIDGET(self->start_button);
     GtkWidget *reset_btn_widget = GTK_WIDGET(self->reset_button);
 
@@ -208,13 +194,13 @@ static void update_control_buttons(SamayaWindow *self)
     }
 }
 
-static void on_routine_changed(AdwToggleGroup *toggle_group, GParamSpec *pspec,
-                               gpointer samaya_window)
+static void handle_routine_change(AdwToggleGroup *toggle_group, GParamSpec *pspec,
+                                  gpointer samaya_window)
 {
     SamayaWindow *self = SAMAYA_WINDOW(samaya_window);
     const char *active_name = adw_toggle_group_get_active_name(toggle_group);
 
-    SessionManager *session_manager = sm_get_global_ptr();
+    SessionManager *session_manager = sm_get_global();
 
     RoutineType routine;
     if (g_strcmp0(active_name, "pomodoro") == 0) {
@@ -230,13 +216,13 @@ static void on_routine_changed(AdwToggleGroup *toggle_group, GParamSpec *pspec,
     sm_set_routine(routine, session_manager);
 
     update_progress_circle_color(self);
-    update_control_buttons(self);
+    ui_update_control_buttons(self);
 }
 
-static void on_press_start(GtkWidget *widget, const char *action_name, GVariant *param)
+static void handle_press_start(GtkWidget *widget, const char *action_name, GVariant *param)
 {
     SamayaWindow *self = SAMAYA_WINDOW(widget);
-    Timer *timer = get_timer_instance(self);
+    TimerPtr timer = tm_get_global();
     gboolean is_running = tm_get_is_running(timer);
 
     if (is_running) {
@@ -245,24 +231,24 @@ static void on_press_start(GtkWidget *widget, const char *action_name, GVariant 
         tm_start(timer);
     }
 
-    update_control_buttons(self);
+    ui_update_control_buttons(self);
 }
 
-static void on_press_reset(GtkWidget *widget, const char *action_name, GVariant *param)
+static void handle_press_reset(GtkWidget *widget, const char *action_name, GVariant *param)
 {
     SamayaWindow *self = SAMAYA_WINDOW(widget);
 
-    tm_reset(get_timer_instance(self));
+    tm_reset(tm_get_global());
 
-    update_control_buttons(self);
+    ui_update_control_buttons(self);
 }
 
-static void on_press_skip(GtkWidget *widget, const char *action_name, GVariant *param)
+static void handle_press_skip(GtkWidget *widget, const char *action_name, GVariant *param)
 {
     SamayaWindow *self = SAMAYA_WINDOW(widget);
 
     sm_skip_current_session();
-    update_control_buttons(self);
+    ui_update_control_buttons(self);
 }
 
 /* ============================================================================
@@ -272,15 +258,13 @@ static void on_press_skip(GtkWidget *widget, const char *action_name, GVariant *
 static void draw_progress_circle(GtkDrawingArea *area, cairo_t *cr, int width, int height,
                                  gpointer user_data)
 {
-    SamayaWindow *self = SAMAYA_WINDOW(user_data);
-
     double line_width = 10.0;
 
     double center_x = width / 2.0;
     double center_y = height / 2.0;
     double radius = MIN(width, height) / 2.0 - line_width;
 
-    gfloat progress = tm_get_progress(get_timer_instance(self));
+    gfloat progress = tm_get_progress(tm_get_global());
 
     GdkRGBA color;
     gtk_widget_get_color(GTK_WIDGET(area), &color);
@@ -301,6 +285,7 @@ static void draw_progress_circle(GtkDrawingArea *area, cairo_t *cr, int width, i
     cairo_stroke(cr);
 }
 
+
 /* ============================================================================
  * Samaya Window Methods
  * ============================================================================ */
@@ -311,14 +296,14 @@ static void samaya_window_realize(GtkWidget *widget)
 
     GTK_WIDGET_CLASS(samaya_window_parent_class)->realize(widget);
 
-    sm_set_timer_tick_callback(update_timer_label);
-    sm_set_routine_update_callback(update_routine_toggle_switch);
+    sm_set_timer_tick_callback(ui_update_timer_label);
+    sm_set_routine_update_callback(ui_update_routine_toggle_switch);
 
-    Timer *timer = get_timer_instance(self);
+    TimerPtr timer = tm_get_global();
     gtk_label_set_text(self->timer_label, tm_get_time_str(timer));
 
     update_progress_circle_color(self);
-    update_control_buttons(self);
+    ui_update_control_buttons(self);
 }
 
 static void samaya_window_class_init(SamayaWindowClass *klass)
@@ -340,9 +325,9 @@ static void samaya_window_class_init(SamayaWindowClass *klass)
     gtk_widget_class_bind_template_child(widget_class, SamayaWindow, start_button);
     gtk_widget_class_bind_template_child(widget_class, SamayaWindow, reset_button);
 
-    gtk_widget_class_install_action(widget_class, "win.start-timer", NULL, on_press_start);
-    gtk_widget_class_install_action(widget_class, "win.reset-timer", NULL, on_press_reset);
-    gtk_widget_class_install_action(widget_class, "win.skip-session", NULL, on_press_skip);
+    gtk_widget_class_install_action(widget_class, "win.start-timer", NULL, handle_press_start);
+    gtk_widget_class_install_action(widget_class, "win.reset-timer", NULL, handle_press_reset);
+    gtk_widget_class_install_action(widget_class, "win.skip-session", NULL, handle_press_skip);
 }
 
 static void samaya_window_init(SamayaWindow *self)
@@ -352,5 +337,5 @@ static void samaya_window_init(SamayaWindow *self)
     gtk_drawing_area_set_draw_func(self->progress_circle, draw_progress_circle, self, NULL);
 
     g_signal_connect(self->routine_toggle_group, "notify::active-name",
-                     G_CALLBACK(on_routine_changed), self);
+                     G_CALLBACK(handle_routine_change), self);
 }

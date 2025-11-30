@@ -25,9 +25,10 @@
  * ============================================================================ */
 
 // Yeah, I know this is unsafe, anyway....
-// Also, maybe I should use a mutex to make this thread safe? or maybe not
-// because the timer struct itself has a mutex?
-static Timer *globalTimerPtr = NULL;
+// The lifetime of the timer instance will be the same as that of SAMAYA_APPLICATION,
+// so this variable will be valid for the entire duration of SAMAYA_APPLICATION, irrespective of
+// wether the window is being displayed or not.
+static TimerPtr globalTimerPtr = NULL;
 
 
 /* ============================================================================
@@ -35,13 +36,13 @@ static Timer *globalTimerPtr = NULL;
  * ============================================================================ */
 
 // Will return NULL if timer is not initialised!
-Timer *tm_get_global_ptr(void)
+TimerPtr tm_get_global(void)
 {
-    if (globalTimerPtr) {
-        return globalTimerPtr;
+    if (globalTimerPtr == NULL) {
+        g_critical("Timer was accessed but is uninitialised. Trying to use the timer instance "
+                   "using this pointer is unsafe and will lead to undefined behaviour!");
     }
-    g_critical("Timer was accessed but is uninitialised!");
-    return NULL;
+    return globalTimerPtr;
 }
 
 

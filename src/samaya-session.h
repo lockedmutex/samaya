@@ -44,7 +44,7 @@ typedef struct
     guint16 sessions_completed;
     guint64 total_sessions_counted;
 
-    Timer *timer_instance;
+    TimerPtr timer_instance;
     GSoundContext *gsound_ctx;
 
     gpointer user_data;
@@ -54,9 +54,12 @@ typedef struct
     gboolean (*sm_routine_update_callback)(gpointer user_data);
 } SessionManager;
 
-SessionManager *sm_get_global_ptr(void);
+typedef SessionManager *SessionManagerPtr;
 
-SessionManager *sm_init(guint16 sessions_to_complete, gdouble work_duration,
+
+SessionManagerPtr sm_get_global(void);
+
+SessionManagerPtr sm_init(guint16 sessions_to_complete, gdouble work_duration,
                         gdouble short_break_duration, gdouble long_break_duration,
                         gboolean (*timer_instance_tick_callback)(gpointer user_data),
                         gpointer user_data);

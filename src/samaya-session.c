@@ -26,20 +26,25 @@
  * Static Variables
  * ============================================================================ */
 
-// Will return NULL if the timer is not initialized!
-static SessionManager *globalSessionManagerPtr = NULL;
+// Yeah, I know this is unsafe, anyway....
+// The lifetime of the SessionManager instance will be the same as that of SAMAYA_APPLICATION,
+// so this variable will be valid for the entire duration of SAMAYA_APPLICATION, irrespective of
+// wether the window is being displayed or not.
+static SessionManagerPtr globalSessionManagerPtr = NULL;
 
 
 /* ============================================================================
  * Methods for Static Variables
  * ============================================================================ */
 
-SessionManager *sm_get_global_ptr(void)
+SessionManagerPtr sm_get_global(void)
 {
-    if (globalSessionManagerPtr) {
-        return globalSessionManagerPtr;
+    if (globalSessionManagerPtr == NULL) {
+        g_critical(
+            "Session Manager was accessed but is uninitialised! Trying to use the timer instance "
+            "using this pointer is unsafe and will lead to undefined behaviour!");
     }
-    g_critical("Session Manager was accessed but is uninitialised!");
+
     return globalSessionManagerPtr;
 }
 
@@ -48,7 +53,7 @@ SessionManager *sm_get_global_ptr(void)
  * Function Definitions
  * ============================================================================ */
 
-static void on_session_completion(gboolean play_sound);
+static void handle_session_completion(gboolean play_sound);
 
 static void play_completion_sound(GSoundContext *g_sound_ctx);
 
@@ -59,12 +64,12 @@ static void timer_tick_callback(void);
  * SessionManager Methods
  * ============================================================================ */
 
-SessionManager *sm_init(guint16 sessions_to_complete, gdouble work_duration,
-                        gdouble short_break_duration, gdouble long_break_duration,
-                        gboolean (*timer_instance_tick_callback)(gpointer user_data),
-                        gpointer user_data)
+SessionManagerPtr sm_init(guint16 sessions_to_complete, gdouble work_duration,
+                          gdouble short_break_duration, gdouble long_break_duration,
+                          gboolean (*timer_instance_tick_callback)(gpointer user_data),
+                          gpointer user_data)
 {
-    SessionManager *session_manager = g_new0(SessionManager, 1);
+    SessionManagerPtr session_manager = g_new0(SessionManager, 1);
 
     *session_manager = (SessionManager) {
         .work_duration = work_duration,
@@ -77,15 +82,13 @@ SessionManager *sm_init(guint16 sessions_to_complete, gdouble work_duration,
         .sessions_completed = 0,
         .total_sessions_counted = 0,
 
-        .timer_instance = NULL,
+        .timer_instance = tm_init(work_duration, handle_session_completion, timer_tick_callback),
         .gsound_ctx = gsound_context_new(NULL, NULL),
 
         .user_data = user_data,
-    };
 
-    session_manager->timer_instance =
-        tm_init(session_manager->work_duration, on_session_completion, timer_tick_callback);
-    session_manager->sm_timer_tick_callback = timer_instance_tick_callback;
+        .sm_timer_tick_callback = timer_instance_tick_callback,
+    };
 
     globalSessionManagerPtr = session_manager;
     return session_manager;
@@ -106,7 +109,7 @@ void sm_deinit(SessionManager *session_manager)
 
 static void timer_tick_callback(void)
 {
-    SessionManager *session_manager = sm_get_global_ptr();
+    SessionManager *session_manager = sm_get_global();
     if (!session_manager) {
         g_critical("Session Manager has not been Initialised yet! Failed to update timer tick!");
         return;
@@ -115,9 +118,9 @@ static void timer_tick_callback(void)
     g_idle_add(session_manager->sm_timer_tick_callback, session_manager->user_data);
 }
 
-static void on_session_completion(gboolean play_sound)
+static void handle_session_completion(gboolean play_sound)
 {
-    SessionManager *session_manager = sm_get_global_ptr();
+    SessionManagerPtr session_manager = sm_get_global();
     if (play_sound) {
         play_completion_sound(session_manager->gsound_ctx);
     }
@@ -127,7 +130,6 @@ static void on_session_completion(gboolean play_sound)
             session_manager->sessions_completed++;
             session_manager->total_sessions_counted++;
 
-            // If this was the last Work session → LongBreak
             if (session_manager->sessions_completed == session_manager->sessions_to_complete) {
                 session_manager->current_routine = LongBreak;
                 session_manager->sessions_completed = 0;
@@ -151,7 +153,7 @@ static void on_session_completion(gboolean play_sound)
 
 void sm_skip_current_session(void)
 {
-    on_session_completion(FALSE);
+    handle_session_completion(FALSE);
 }
 
 static void play_completion_sound(GSoundContext *g_sound_ctx)
@@ -257,7 +259,7 @@ void sm_set_routine(RoutineType routine, SessionManager *session_manager)
 
 void sm_set_timer_tick_callback(gboolean (*timer_instance_tick_callback)(gpointer user_data))
 {
-    SessionManager *session_manager = sm_get_global_ptr();
+    SessionManager *session_manager = sm_get_global();
     if (!session_manager) {
         g_critical("Session Manager has not been Initialised yet! Failed to set tick update "
                    "callback.");
@@ -270,7 +272,7 @@ void sm_set_timer_tick_callback(gboolean (*timer_instance_tick_callback)(gpointe
 void sm_set_timer_tick_callback_with_data(
     gboolean (*timer_instance_tick_callback)(gpointer user_data), gpointer user_data)
 {
-    SessionManager *session_manager = sm_get_global_ptr();
+    SessionManager *session_manager = sm_get_global();
     if (!session_manager) {
         g_critical("Session Manager has not been Initialised yet! Failed to set tick update "
                    "callback and user data.");
@@ -283,7 +285,7 @@ void sm_set_timer_tick_callback_with_data(
 
 void sm_set_routine_update_callback(gboolean (*routine_update_callback)(gpointer))
 {
-    SessionManager *session_manager = sm_get_global_ptr();
+    SessionManager *session_manager = sm_get_global();
     if (session_manager) {
         session_manager->sm_routine_update_callback = routine_update_callback;
     }

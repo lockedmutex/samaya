@@ -22,7 +22,6 @@
 #include "samaya-application.h"
 #include "samaya-preferences-dialog.h"
 #include "samaya-session.h"
-#include "samaya-timer.h"
 #include "samaya-window.h"
 
 struct _SamayaApplication
@@ -30,7 +29,7 @@ struct _SamayaApplication
     AdwApplication parent_instance;
 
     // PomoDoro Session Manager Instance:
-    SessionManager *samayaSessionManager;
+    SessionManagerPtr samayaSessionManager;
 };
 
 G_DEFINE_FINAL_TYPE(SamayaApplication, samaya_application, ADW_TYPE_APPLICATION)
@@ -156,25 +155,12 @@ static void samaya_application_init(SamayaApplication *self)
     guint16 sessions = g_variant_get_uint16(sessions_variant);
     g_variant_unref(sessions_variant);
 
-    gdouble work_dur = g_settings_get_double(settings, "work-duration");
-    gdouble short_dur = g_settings_get_double(settings, "short-break-duration");
-    gdouble long_dur = g_settings_get_double(settings, "long-break-duration");
+    gdouble work_duration = g_settings_get_double(settings, "work-duration");
+    gdouble short_duration = g_settings_get_double(settings, "short-break-duration");
+    gdouble long_duration = g_settings_get_double(settings, "long-break-duration");
 
-    self->samayaSessionManager = sm_init(sessions, work_dur, short_dur, long_dur, NULL, self);
+    self->samayaSessionManager =
+        sm_init(sessions, work_duration, short_duration, long_duration, NULL, self);
 
     g_object_unref(settings);
-}
-
-/* ============================================================================
- * Timer Helpers for Samaya Application
- * ============================================================================ */
-
-Timer *samaya_application_get_timer(SamayaApplication *self)
-{
-    return self->samayaSessionManager->timer_instance;
-}
-
-SessionManager *samaya_application_get_session_manager(SamayaApplication *self)
-{
-    return self->samayaSessionManager;
 }
