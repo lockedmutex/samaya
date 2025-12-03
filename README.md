@@ -1,11 +1,8 @@
-<div style="text-align: center;">
-  <img src="data/icons/hicolor/scalable/apps/io.github.redddfoxxyy.samaya.svg" alt="Samaya app icon" width="200" />
-</div>
+<p align="center">
+  <img src="data/icons/hicolor/scalable/apps/io.github.redddfoxxyy.samaya.svg" alt="Samaya app icon" width="200"/>
+</p>
 
-<div style="text-align:center">
-  <h1>Samaya</h1>
-</div>
-
+<h1 align="center">Samaya</h1>
 
 <p align="center">
   <img src="data/screenshots/screenshot1.png"  alt="Samaya Screenshot 1"/>
