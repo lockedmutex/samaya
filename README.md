@@ -57,8 +57,8 @@
 
 | Dep Name                                                         | `pkg-config` Name | Min Version            | Justification                                       |
 |------------------------------------------------------------------|-------------------|------------------------|-----------------------------------------------------|
-| [gtk4](https://gitlab.gnome.org/GNOME/gtk/)                      | `gtk4`            | enforced by libadwaita | GUI                                                 |
-| [libadwaita](https://gitlab.gnome.org/GNOME/libadwaita)          | `libadwaita-1`    | `1.7`                  | GNOME styling                                       |
+| [gtk4](https://gitlab.gnome.org/GNOME/gtk/)                      | `gtk4`            | `4.20`                 | GUI                                                 |
+| [libadwaita](https://gitlab.gnome.org/GNOME/libadwaita)          | `libadwaita-1`    | `1.8`                  | GNOME styling                                       |
 | [gsound](https://gitlab.gnome.org/GNOME/gsound)                  | `gsound`          | `1.0.3`                | Playing System Sounds                               |
 | [libcanberra](https://0pointer.de/lennart/projects/libcanberra/) | `libcanberra`     | `0.30`                 | Dependency for gsound                               |
 
@@ -74,15 +74,15 @@
 2. **Build the application using Meson:**
 
     ```bash
-    meson setup build_release --buildtype=release
-    meson compile -C build_release
-    ./build_release/src/samaya
+    meson setup builddir --buildtype=release
+    meson compile -C builddir
+    ./builddir/src/samaya
     ```
 	
 3. **Install the application:**
 
     ```bash
-    meson install -C build_release
+    meson install -C builddir
     ```
 	
 ## For Contributors:

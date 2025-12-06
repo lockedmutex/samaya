@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.20"/>
+  <requires lib="libadwaita" version="1.8"/>
+  <template class="SamayaPreferencesDialog" parent="AdwPreferencesDialog">
+    <child>
+      <object class="AdwPreferencesPage">
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Timer Durations</property>
+            <property name="description" translatable="yes">Set the duration (in minutes) for each routine.</property>
+            
+            <child>
+              <object class="AdwSpinRow" id="work_duration_row">
+                <property name="title" translatable="yes">Work</property>
+                <property name="digits">1</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">0.5</property>
+                    <property name="upper">2160.0</property>
+                    <property name="step-increment">0.5</property>
+                  </object>
+                </property>
+                <signal name="notify::value" handler="on_work_duration_changed" swapped="no"/>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwSpinRow" id="short_break_row">
+                <property name="title" translatable="yes">Short Break</property>
+                <property name="digits">1</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">0.5</property>
+                    <property name="upper">2160.0</property>
+                    <property name="step-increment">0.5</property>
+                  </object>
+                </property>
+                <signal name="notify::value" handler="on_short_break_changed" swapped="no"/>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwSpinRow" id="long_break_row">
+                <property name="title" translatable="yes">Long Break</property>
+                <property name="digits">1</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">0.5</property>
+                    <property name="upper">2160.0</property>
+                    <property name="step-increment">0.5</property>
+                  </object>
+                </property>
+                <signal name="notify::value" handler="on_long_break_changed" swapped="no"/>
+              </object>
+            </child>
+
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Session Cycle</property>
+            <child>
+              <object class="AdwSpinRow" id="sessions_count_row">
+                <property name="title" translatable="yes">Sessions before Long Break</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">1.0</property>
+                    <property name="upper">255.0</property>
+                    <property name="step-increment">1.0</property>
+                  </object>
+                </property>
+                <signal name="notify::value" handler="on_sessions_count_changed" swapped="no"/>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

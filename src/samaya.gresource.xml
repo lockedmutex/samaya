@@ -3,6 +3,7 @@
     <gresource prefix="/io/github/redddfoxxyy/samaya">
         <file preprocess="xml-stripblanks">samaya-window.ui</file>
         <file preprocess="xml-stripblanks">shortcuts-dialog.ui</file>
+        <file preprocess="xml-stripblanks">preferences-dialog.ui</file>
         <file>samaya-style.css</file>
     </gresource>
 </gresources>
