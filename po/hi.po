@@ -1,9 +1,8 @@
-# Samaya — a simple Pomodoro timer for desktop
+# Hindi translation for io.github.redddfoxxyy.samaya.
 # Copyright (C) 2025 Suyog Tandel
 # This file is distributed under the same license as the samaya package.
 # Suyog Tandel <suyogtandel@proton.me>, 2025.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: samaya\n"
@@ -47,9 +46,8 @@ msgid "Suyog Tandel"
 msgstr "सुयोग तांडेल"
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:66
-#, fuzzy
 msgid "Work Session"
-msgstr "समय कार्य सत्र"
+msgstr "कार्य सत्र"
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:70
 #: src/preferences-dialog.ui:30 src/samaya-window.ui:49

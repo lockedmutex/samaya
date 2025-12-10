@@ -1,35 +1,36 @@
-# Samaya — a simple Pomodoro timer for desktop
+# Marathi translation for io.github.redddfoxxyy.samaya.
 # Copyright (C) 2025 Suyog Tandel
 # This file is distributed under the same license as the samaya package.
+#
 # Suyog Tandel <suyogtandel@proton.me>, 2025.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: samaya\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-10 12:16+0530\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2025-12-10 12:30+0530\n"
+"Last-Translator: Suyog Tandel <suyogtandel@proton.me>\n"
+"Language-Team: Marathi\n"
 "Language: mr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/io.github.redddfoxxyy.samaya.desktop.in:2
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:7
 #: src/samaya-application.c:63 src/samaya-window.ui:6
 msgid "Samaya"
-msgstr ""
+msgstr "समय"
 
 #: data/io.github.redddfoxxyy.samaya.desktop.in:8
 msgid "Productivity;Pomodoro;Timer;Time;Tracker;"
-msgstr ""
+msgstr "उत्पादकता;पोमोडोरो;टाइमर;वेळ;ट्रॅकर;"
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:8
 msgid "Timekeeper for your tasks"
-msgstr ""
+msgstr "तुमच्या कार्यांसाठी वेळरक्षक"
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:10
 msgid ""
@@ -37,141 +38,144 @@ msgid ""
 "help you stay focused and productive, it offers a clean, distraction-free "
 "interface to manage work and break intervals with ease."
 msgstr ""
+"तुमच्या डेस्कटॉपसाठी एक साधे, सुंदर आणि सुटसुटीत पोमोडोरो टाइमर. तुम्हाला एकाग्र आणि "
+"उत्पादक राहण्यास मदत करण्यासाठी डिझाइन केलेले, हे काम आणि विश्रांतीचे अंतराल "
+"सहजतेने व्यवस्थापित करण्यासाठी एक स्वच्छ, व्यत्यय-मुक्त इंटरफेस देते."
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:16
 #: src/samaya-application.c:54 src/samaya-application.c:65
 msgid "Suyog Tandel"
-msgstr ""
+msgstr "सुयोग तांडेल"
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:66
 msgid "Work Session"
-msgstr ""
+msgstr "कार्य सत्र"
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:70
 #: src/preferences-dialog.ui:30 src/samaya-window.ui:49
 msgid "Short Break"
-msgstr ""
+msgstr "लहान विश्रांती"
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:74
 #: src/preferences-dialog.ui:45 src/samaya-window.ui:55
 msgid "Long Break"
-msgstr ""
+msgstr "दीर्घ विश्रांती"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:6
 msgid "Work session duration"
-msgstr ""
+msgstr "कार्य सत्र कालावधी"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:7
 msgid "Duration of work sessions in minutes"
-msgstr ""
+msgstr "कार्य सत्रांचा कालावधी मिनिटांमध्ये"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:11
 msgid "Short break duration"
-msgstr ""
+msgstr "लहान विश्रांतीचा कालावधी"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:12
 msgid "Duration of short breaks in minutes"
-msgstr ""
+msgstr "लहान विश्रांतीचा कालावधी मिनिटांमध्ये"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:16
 msgid "Long break duration"
-msgstr ""
+msgstr "दीर्घ विश्रांतीचा कालावधी"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:17
 msgid "Duration of long breaks in minutes"
-msgstr ""
+msgstr "दीर्घ विश्रांतीचा कालावधी मिनिटांमध्ये"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:21
 msgid "Sessions before long break"
-msgstr ""
+msgstr "दीर्घ विश्रांतीपूर्वीची सत्रे"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:22
 msgid "Number of work sessions to complete before a long break"
-msgstr ""
+msgstr "दीर्घ विश्रांती घेण्यापूर्वी पूर्ण करायच्या कार्य सत्रांची संख्या"
 
 #: src/preferences-dialog.ui:10
 msgid "Timer Durations"
-msgstr ""
+msgstr "टाइमर कालावधी"
 
 #: src/preferences-dialog.ui:11
 msgid "Set the duration (in minutes) for each routine."
-msgstr ""
+msgstr "प्रत्येक दिनचर्येसाठी कालावधी (मिनिटांमध्ये) सेट करा."
 
 #: src/preferences-dialog.ui:15
 msgid "Work"
-msgstr ""
+msgstr "काम"
 
 #: src/preferences-dialog.ui:63
 msgid "Session Cycle"
-msgstr ""
+msgstr "सत्र चक्र"
 
 #: src/preferences-dialog.ui:66
 msgid "Sessions before Long Break"
-msgstr ""
+msgstr "दीर्घ विश्रांतीपूर्वीची सत्रे"
 
 #: src/samaya-application.c:66
 msgid "translator-credits"
-msgstr ""
+msgstr "सुयोग तांडेल"
 
 #: src/samaya-window.c:166
 msgid "Stop"
-msgstr ""
+msgstr "थांबा"
 
 #: src/samaya-window.c:172
 msgid "Skip Session"
-msgstr ""
+msgstr "सत्र वगळा"
 
 #: src/samaya-window.c:178
 msgid "Resume"
-msgstr ""
+msgstr "पुन्हा सुरू करा"
 
 #: src/samaya-window.c:184
 msgid "Reset Timer"
-msgstr ""
+msgstr "टाइमर रीसेट करा"
 
 #: src/samaya-window.c:190 src/samaya-window.ui:145
 msgid "Start"
-msgstr ""
+msgstr "सुरू करा"
 
 #: src/samaya-window.ui:19
 msgid "Main Menu"
-msgstr ""
+msgstr "मुख्य मेनू"
 
 #: src/samaya-window.ui:43
 msgid "Pomodoro"
-msgstr ""
+msgstr "पोमोडोरो"
 
 #: src/samaya-window.ui:155
 msgid "Reset"
-msgstr ""
+msgstr "रीसेट"
 
 #: src/samaya-window.ui:177
 msgid "_Preferences"
-msgstr ""
+msgstr "प्राधान्ये"
 
 #: src/samaya-window.ui:181
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "कीबोर्ड शॉर्टकट्स"
 
 #: src/samaya-window.ui:185
 msgid "_About Samaya"
-msgstr ""
+msgstr "समय बद्दल"
 
 #: src/shortcuts-dialog.ui:6
 msgid "Shortcuts"
-msgstr ""
+msgstr "शॉर्टकट्स"
 
 #: src/shortcuts-dialog.ui:9
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "शॉर्टकट्स दाखवा"
 
 #: src/shortcuts-dialog.ui:15
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr ""
+msgstr "प्राधान्ये दाखवा"
 
 #: src/shortcuts-dialog.ui:21
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "बाहेर पडा"
