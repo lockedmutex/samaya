@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: samaya\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-03 12:06+0530\n"
+"POT-Creation-Date: 2025-12-10 12:16+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/io.github.redddfoxxyy.samaya.desktop.in:2
-#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:7 src/samaya-window.ui:6
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:7
+#: src/samaya-application.c:63 src/samaya-window.ui:6
 msgid "Samaya"
 msgstr ""
 
 #: data/io.github.redddfoxxyy.samaya.desktop.in:8
-msgid "GTK;"
+msgid "Productivity;Pomodoro;Timer;Time;Tracker;"
 msgstr ""
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:8
@@ -38,40 +39,22 @@ msgid ""
 msgstr ""
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:16
-#: src/samaya-application.c:114 src/samaya-application.c:123
+#: src/samaya-application.c:54 src/samaya-application.c:65
 msgid "Suyog Tandel"
 msgstr ""
 
-#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:63
-msgid "Productivity"
-msgstr ""
-
-#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:64 src/samaya-window.ui:43
-msgid "Pomodoro"
-msgstr ""
-
-#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:65
-msgid "Timer"
-msgstr ""
-
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:66
-msgid "Time"
+msgid "Work Session"
 msgstr ""
 
-#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:67
-msgid "Tracker"
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:70
+#: src/preferences-dialog.ui:30 src/samaya-window.ui:49
+msgid "Short Break"
 msgstr ""
 
-#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:79
-msgid "Samaya Work Session"
-msgstr ""
-
-#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:83
-msgid "Samaya Short Break"
-msgstr ""
-
-#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:87
-msgid "Samaya Long Break"
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:74
+#: src/preferences-dialog.ui:45 src/samaya-window.ui:55
+msgid "Long Break"
 msgstr ""
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:6
@@ -106,12 +89,44 @@ msgstr ""
 msgid "Number of work sessions to complete before a long break"
 msgstr ""
 
-#: src/samaya-window.c:168
+#: src/preferences-dialog.ui:10
+msgid "Timer Durations"
+msgstr ""
+
+#: src/preferences-dialog.ui:11
+msgid "Set the duration (in minutes) for each routine."
+msgstr ""
+
+#: src/preferences-dialog.ui:15
+msgid "Work"
+msgstr ""
+
+#: src/preferences-dialog.ui:63
+msgid "Session Cycle"
+msgstr ""
+
+#: src/preferences-dialog.ui:66
+msgid "Sessions before Long Break"
+msgstr ""
+
+#: src/samaya-application.c:66
+msgid "translator-credits"
+msgstr ""
+
+#: src/samaya-window.c:166
 msgid "Stop"
 msgstr ""
 
-#: src/samaya-window.c:182
+#: src/samaya-window.c:172
+msgid "Skip Session"
+msgstr ""
+
+#: src/samaya-window.c:178
 msgid "Resume"
+msgstr ""
+
+#: src/samaya-window.c:184
+msgid "Reset Timer"
 msgstr ""
 
 #: src/samaya-window.c:190 src/samaya-window.ui:145
@@ -122,12 +137,8 @@ msgstr ""
 msgid "Main Menu"
 msgstr ""
 
-#: src/samaya-window.ui:49 src/samaya-preferences-dialog.c:143
-msgid "Short Break"
-msgstr ""
-
-#: src/samaya-window.ui:55 src/samaya-preferences-dialog.c:146
-msgid "Long Break"
+#: src/samaya-window.ui:43
+msgid "Pomodoro"
 msgstr ""
 
 #: src/samaya-window.ui:155
@@ -146,26 +157,6 @@ msgstr ""
 msgid "_About Samaya"
 msgstr ""
 
-#: src/samaya-preferences-dialog.c:137
-msgid "Timer Durations"
-msgstr ""
-
-#: src/samaya-preferences-dialog.c:138
-msgid "Set the duration (in minutes) for each routine."
-msgstr ""
-
-#: src/samaya-preferences-dialog.c:140
-msgid "Work"
-msgstr ""
-
-#: src/samaya-preferences-dialog.c:154
-msgid "Session Cycle"
-msgstr ""
-
-#: src/samaya-preferences-dialog.c:156
-msgid "Sessions before Long Break"
-msgstr ""
-
 #: src/shortcuts-dialog.ui:6
 msgid "Shortcuts"
 msgstr ""
@@ -177,13 +168,10 @@ msgstr ""
 
 #: src/shortcuts-dialog.ui:15
 msgctxt "shortcut window"
+msgid "Show Preferences"
+msgstr ""
+
+#: src/shortcuts-dialog.ui:21
+msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
-
-#: src/samaya-application.c:122
-msgid "samaya"
-msgstr ""
-
-#: src/samaya-application.c:124
-msgid "translator-credits"
 msgstr ""

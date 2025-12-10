@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: samaya\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-08 22:14+0300\n"
+"POT-Creation-Date: 2025-12-10 12:16+0530\n"
 "PO-Revision-Date: 2025-12-08 22:19+0300\n"
 "Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Türkçe <takim@gnome.org.tr>\n"
@@ -20,8 +20,8 @@ msgstr ""
 "X-Generator: Poedit 3.8\n"
 
 #: data/io.github.redddfoxxyy.samaya.desktop.in:2
-#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:7 src/samaya-application.c:63
-#: src/samaya-window.ui:6
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:7
+#: src/samaya-application.c:63 src/samaya-window.ui:6
 msgid "Samaya"
 msgstr "Samaya"
 
@@ -37,17 +37,17 @@ msgstr "Görevleriniz için zaman takipçisi"
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:10
 msgid ""
-"A simple, elegant, minimalist Pomodoro timer for your desktop. Designed to help "
-"you stay focused and productive, it offers a clean, distraction-free interface to "
-"manage work and break intervals with ease."
+"A simple, elegant, minimalist Pomodoro timer for your desktop. Designed to "
+"help you stay focused and productive, it offers a clean, distraction-free "
+"interface to manage work and break intervals with ease."
 msgstr ""
 "Masaüstünüz için zarif ve minimalist Pomodoro zamanlayıcı. Odaklanmanızı ve "
 "üretkenliğinizi korumak için tasarlanan bu zamanlayıcı, çalışma ve mola "
 "aralıklarını yönetmeniz için temiz ve dikkat dağıtmayan arayüz sunar."
 
 # Geliştiricinin adı
-#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:16 src/samaya-application.c:54
-#: src/samaya-application.c:65
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:16
+#: src/samaya-application.c:54 src/samaya-application.c:65
 msgid "Suyog Tandel"
 msgstr "Suyog Tandel"
 
@@ -55,13 +55,13 @@ msgstr "Suyog Tandel"
 msgid "Work Session"
 msgstr "Çalışma Oturumu"
 
-#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:70 src/preferences-dialog.ui:30
-#: src/samaya-window.ui:49
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:70
+#: src/preferences-dialog.ui:30 src/samaya-window.ui:49
 msgid "Short Break"
 msgstr "Kısa Mola"
 
-#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:74 src/preferences-dialog.ui:45
-#: src/samaya-window.ui:55
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:74
+#: src/preferences-dialog.ui:45 src/samaya-window.ui:55
 msgid "Long Break"
 msgstr "Uzun Mola"
 
@@ -175,6 +175,12 @@ msgid "Show Shortcuts"
 msgstr "Kısayolları Göster"
 
 #: src/shortcuts-dialog.ui:15
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Show Preferences"
+msgstr "Ter_cihler"
+
+#: src/shortcuts-dialog.ui:21
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Çık"

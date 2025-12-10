@@ -66,6 +66,8 @@ static void samaya_application_about_action(GSimpleAction *action, GVariant *par
                           "translator-credits", _("translator-credits"),
                           "version", "0.1.4",
                           "developers", developers,
+                          "website", "https://samaya.suyogtandel.in/",
+                          "issue-url", "https://codeberg.org/lockedmutex/samaya/issues",
                           "copyright", "© 2025 Suyog Tandel",
                           "license-type", GTK_LICENSE_AGPL_3_0, NULL);
 }
