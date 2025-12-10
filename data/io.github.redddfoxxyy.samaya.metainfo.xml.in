@@ -17,7 +17,7 @@
   </developer>
 
   <!-- Required: Should be a link to the upstream homepage for the component -->
-  <url type="homepage">https://codeberg.org/lockedmutex/samaya</url>
+  <url type="homepage">https://samaya.suyogtandel.in/</url>
   <!-- Recommended: It is highly recommended for open-source projects to display the source code repository -->
   <url type="vcs-browser">https://codeberg.org/lockedmutex/samaya</url>
   <!-- Should point to the software's bug tracking system, for users to report new bugs -->
@@ -76,6 +76,17 @@
   </screenshots>
 
   <releases>
+   <release version="0.1.4" date="2025-12-10">
+     <url type="details">https://codeberg.org/lockedmutex/samaya/releases/tag/0.1.4</url>
+     <description translate="no">
+       <p>Release Changelog:</p>
+        <ul>
+          <li>Add Turkish translations.</li>
+          <li>Update project VCS and website link.</li>
+          <li>Add translations for Marathi.</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.1.3" date="2025-11-30">
       <url type="details">https://codeberg.org/lockedmutex/samaya/releases/tag/0.1.3</url>
       <description translate="no">
