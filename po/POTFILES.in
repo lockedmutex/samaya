@@ -4,8 +4,9 @@ data/io.github.redddfoxxyy.samaya.desktop.in
 data/io.github.redddfoxxyy.samaya.metainfo.xml.in
 data/io.github.redddfoxxyy.samaya.gschema.xml
 src/main.c
+src/preferences-dialog.ui
+src/samaya-application.c
+src/samaya-preferences-dialog.c
 src/samaya-window.c
 src/samaya-window.ui
-src/samaya-preferences-dialog.c
 src/shortcuts-dialog.ui
-src/samaya-application.c

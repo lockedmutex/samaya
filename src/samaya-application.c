@@ -59,10 +59,14 @@ static void samaya_application_about_action(GSimpleAction *action, GVariant *par
 
     window = gtk_application_get_active_window(GTK_APPLICATION(self));
 
-    adw_show_about_dialog(GTK_WIDGET(window), "application-name", _("samaya"), "application-icon",
-                          "io.github.redddfoxxyy.samaya", "developer-name", _("Suyog Tandel"),
-                          "translator-credits", _("translator-credits"), "version", "0.1.4",
-                          "developers", developers, "copyright", "© 2025 Suyog Tandel",
+    adw_show_about_dialog(GTK_WIDGET(window),
+                          "application-name", _("Samaya"),
+                          "application-icon", "io.github.redddfoxxyy.samaya",
+                          "developer-name", _("Suyog Tandel"),
+                          "translator-credits", _("translator-credits"),
+                          "version", "0.1.4",
+                          "developers", developers,
+                          "copyright", "© 2025 Suyog Tandel",
                           "license-type", GTK_LICENSE_AGPL_3_0, NULL);
 }
 
@@ -146,6 +150,8 @@ static void samaya_application_init(SamayaApplication *self)
     g_action_map_add_action_entries(G_ACTION_MAP(self), appActions, G_N_ELEMENTS(appActions), self);
     gtk_application_set_accels_for_action(GTK_APPLICATION(self), "app.quit",
                                           (const char *[]) {"<control>q", NULL});
+    gtk_application_set_accels_for_action(GTK_APPLICATION(self), "app.preferences",
+                                          (const char *[]) {"<control>comma", NULL});
 
     // TODO: Convert the given block of code till line 163 into a function.
     GSettings *settings = g_settings_new("io.github.redddfoxxyy.samaya");

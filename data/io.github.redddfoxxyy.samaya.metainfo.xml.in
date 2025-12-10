@@ -54,19 +54,6 @@
     <display_length compare="ge">360</display_length>
   </requires>
 
-  <categories>
-    <category>Utility</category>
-    <category>Clock</category>
-  </categories>
-
-  <keywords>
-    <keyword>Productivity</keyword>
-      <keyword>Pomodoro</keyword>
-      <keyword>Timer</keyword>
-      <keyword>Time</keyword>
-      <keyword>Tracker</keyword>
-  </keywords>
-
   <!-- Applications should set a brand color in both light and dark variants like so -->
   <branding>
     <color type="primary" scheme_preference="light">#ffbe6f</color>
