@@ -22,6 +22,9 @@
 
     <link rel="icon" type="image/svg+xml" href="./io.github.redddfoxxyy.samaya.svg" />
 
+    <link rel="preconnect" href="https://codeberg.org" />
+    <link rel="dns-prefetch" href="https://codeberg.org" />
+
     <style>
         :root {
             --adw-bg: #fafafa;
@@ -34,6 +37,7 @@
             --adw-radius: 12px;
             --transition-speed: 0.3s;
             --codeberg-brand: #2185d0;
+            --feature-title: #1c71d8;
         }
 
         [data-theme="dark"] {
@@ -45,6 +49,7 @@
             --adw-accent: #3584e4;
             --adw-accent-hover: #78aeed;
             --codeberg-brand: #ffffff;
+            --feature-title: #99c1f1;
         }
 
         * {
@@ -325,7 +330,7 @@
 
         .feature-card h3 {
             margin-bottom: 10px;
-            color: var(--adw-accent);
+            color: var(--feature-title);
         }
 
         .feature-card p {
@@ -335,6 +340,42 @@
 
         .install-section {
             margin-bottom: 80px;
+        }
+
+        .contributors-section {
+            margin-bottom: 80px;
+            text-align: center;
+        }
+
+        .contributors-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .contributor-link {
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+
+        .contributor-link:hover {
+            transform: translateY(-5px);
+        }
+
+        .contributor-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            border: 2px solid var(--adw-border);
+            background-color: var(--adw-card-bg);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .contributor-avatar.loaded {
+            opacity: 1;
         }
 
         .code-wrapper {
@@ -529,6 +570,14 @@ meson compile -C builddir
                 </button>
             </div>
         </div>
+
+        <div class="contributors-section" id="contributors-container" style="display: none;">
+            <h2 class="section-title">Contributors</h2>
+            <p style="opacity: 0.8; margin-bottom: 20px;">Thanks to the developers and translators for their contributions</p>
+            <div class="contributors-grid" id="contributors-list">
+            </div>
+        </div>
+
     </div>
 
     <footer>
@@ -550,14 +599,24 @@ meson compile -C builddir
 
         const toggleBtn = document.getElementById("theme-toggle");
         const htmlElement = document.documentElement;
-        const savedTheme = localStorage.getItem("theme");
-        const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-        if (savedTheme) {
-            htmlElement.setAttribute("data-theme", savedTheme);
-        } else if (systemPrefersDark) {
-            htmlElement.setAttribute("data-theme", "dark");
+        function applyTheme() {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme) {
+                htmlElement.setAttribute("data-theme", savedTheme);
+            } else {
+                htmlElement.setAttribute("data-theme", mediaQuery.matches ? "dark" : "light");
+            }
         }
+
+        applyTheme();
+
+        mediaQuery.addEventListener("change", () => {
+            if (!localStorage.getItem("theme")) {
+                applyTheme();
+            }
+        });
 
         toggleBtn.addEventListener("click", () => {
             const currentTheme = htmlElement.getAttribute("data-theme");
@@ -576,6 +635,94 @@ meson compile -C builddir
                 }, 2000);
             });
         }
+
+        (function() {
+            const CACHE_KEY = "samaya_contributors_v1";
+            const container = document.getElementById("contributors-container");
+            const list = document.getElementById("contributors-list");
+            
+            const renderContributors = (contributors) => {
+                if (!contributors || contributors.length === 0) return;
+                
+                container.style.display = "block";
+                list.innerHTML = "";
+
+                const fragment = document.createDocumentFragment();
+
+                contributors.forEach(contributor => {
+                    const link = document.createElement("a");
+                    link.href = `https://codeberg.org/${contributor.username}`;
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                    link.className = "contributor-link";
+                    link.title = contributor.username;
+
+                    const img = document.createElement("img");
+                    img.src = contributor.avatar_url;
+                    img.alt = contributor.username;
+                    img.className = "contributor-avatar";
+                    
+                    setTimeout(() => img.classList.add("loaded"), 10);
+
+                    link.appendChild(img);
+                    fragment.appendChild(link);
+                });
+
+                list.appendChild(fragment);
+            };
+
+            const cachedData = localStorage.getItem(CACHE_KEY);
+            let hasCache = false;
+
+            if (cachedData) {
+                try {
+                    const parsed = JSON.parse(cachedData);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        renderContributors(parsed);
+                        hasCache = true;
+                    }
+                } catch (e) {
+                }
+            }
+
+            const repoOwner = "lockedmutex";
+            const repoName = "samaya";
+            const apiUrl = `https://codeberg.org/api/v1/repos/${repoOwner}/${repoName}/commits`;
+
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) throw new Error(`API Error: ${response.status}`);
+                    return response.json();
+                })
+                .then(commits => {
+                    const contributorsMap = new Map();
+                    
+                    if (commits && Array.isArray(commits)) {
+                        commits.forEach(commit => {
+                            if (commit.author && commit.author.login) {
+                                if (!contributorsMap.has(commit.author.login)) {
+                                    contributorsMap.set(commit.author.login, {
+                                        username: commit.author.login,
+                                        avatar_url: commit.author.avatar_url,
+                                    });
+                                }
+                            }
+                        });
+                    }
+
+                    const cleanData = Array.from(contributorsMap.values());
+
+                    if (cleanData.length > 0) {
+                        localStorage.setItem(CACHE_KEY, JSON.stringify(cleanData));
+                        renderContributors(cleanData);
+                    }
+                })
+                .catch(error => {
+                    if (!hasCache) {
+                        container.style.display = "none";
+                    }
+                });
+        })();
     </script>
 </body>
 
