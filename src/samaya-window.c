@@ -59,6 +59,21 @@ static void sync_button_state(SamayaWindow *self);
  * UI Actions
  * ============================================================================ */
 
+static void update_timer_font_size(GtkWidget *label, const char *time_text) {
+    guint len = strlen(time_text);
+
+    gtk_widget_remove_css_class(label, "timer-len-short");
+    gtk_widget_remove_css_class(label, "timer-len-medium");
+    gtk_widget_remove_css_class(label, "timer-len-long");
+
+    if (len > 6) {
+        gtk_widget_add_css_class(label, "timer-len-long");
+    } else if (len > 5) {
+        gtk_widget_add_css_class(label, "timer-len-medium");
+    } else {
+        gtk_widget_add_css_class(label, "timer-len-short");
+    }
+}
 
 static void sync_progress_style(SamayaWindow *self)
 {
@@ -101,7 +116,9 @@ static gboolean on_tick_update(gpointer user_data)
     TimerPtr timer = session_manager->timer_instance;
 
     if (timer != NULL) {
-        gtk_label_set_text(self->timer_label, sm_get_formatted_time(session_manager));
+        char *formatted_time = sm_get_formatted_time(session_manager);
+        gtk_label_set_text(self->timer_label, formatted_time);
+        update_timer_font_size(GTK_WIDGET(self->timer_label), formatted_time);
         gtk_widget_queue_draw(GTK_WIDGET(self->progress_circle));
     }
 

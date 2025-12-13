@@ -103,12 +103,8 @@
                                                         <property name="label">25:00</property>
                                                         <property name="halign">center</property>
                                                         <style>
-                                                            <class name="title-1"/>
                                                             <class name="numeric"/>
                                                         </style>
-                                                        <attributes>
-                                                            <attribute name="scale" value="2.2"></attribute>
-                                                        </attributes>
                                                     </object>
                                                 </child>
 

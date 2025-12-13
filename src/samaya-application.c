@@ -64,7 +64,7 @@ static void samaya_application_about_action(GSimpleAction *action, GVariant *par
                           "application-icon", "io.github.redddfoxxyy.samaya",
                           "developer-name", _("Suyog Tandel"),
                           "translator-credits", _("translator-credits"),
-                          "version", "0.1.4",
+                          "version", "0.1.5",
                           "developers", developers,
                           "website", "https://samaya.suyogtandel.in/",
                           "issue-url", "https://codeberg.org/lockedmutex/samaya/issues",

@@ -96,23 +96,23 @@ static void set_initial_preference_values(SessionManagerPtr session_manager,
                                           SamayaPreferencesDialog *self)
 {
     if (session_manager != NULL) {
-        g_signal_handlers_block_by_func(self->work_duration_row, on_work_duration_changed, NULL);
+        g_signal_handlers_block_by_func(self->work_duration_row, on_work_duration_changed, self);
         adw_spin_row_set_value(self->work_duration_row, sm_get_work_duration(session_manager));
-        g_signal_handlers_unblock_by_func(self->work_duration_row, on_work_duration_changed, NULL);
+        g_signal_handlers_unblock_by_func(self->work_duration_row, on_work_duration_changed, self);
 
-        g_signal_handlers_block_by_func(self->short_break_row, on_short_break_changed, NULL);
+        g_signal_handlers_block_by_func(self->short_break_row, on_short_break_changed, self);
         adw_spin_row_set_value(self->short_break_row, sm_get_short_break_duration(session_manager));
-        g_signal_handlers_unblock_by_func(self->short_break_row, on_short_break_changed, NULL);
+        g_signal_handlers_unblock_by_func(self->short_break_row, on_short_break_changed, self);
 
-        g_signal_handlers_block_by_func(self->long_break_row, on_long_break_changed, NULL);
+        g_signal_handlers_block_by_func(self->long_break_row, on_long_break_changed, self);
         adw_spin_row_set_value(self->long_break_row, sm_get_long_break_duration(session_manager));
-        g_signal_handlers_unblock_by_func(self->long_break_row, on_long_break_changed, NULL);
+        g_signal_handlers_unblock_by_func(self->long_break_row, on_long_break_changed, self);
 
-        g_signal_handlers_block_by_func(self->sessions_count_row, on_sessions_count_changed, NULL);
+        g_signal_handlers_block_by_func(self->sessions_count_row, on_sessions_count_changed, self);
         adw_spin_row_set_value(self->sessions_count_row,
                                sm_get_sessions_to_complete(session_manager));
         g_signal_handlers_unblock_by_func(self->sessions_count_row, on_sessions_count_changed,
-                                          NULL);
+                                          self);
     }
 }
 

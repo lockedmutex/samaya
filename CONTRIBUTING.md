@@ -42,7 +42,7 @@ Contributions are accepted only via two formal methods:
 
 * The **`main`** branch is the only branch permitted for forking and cloning for contribution purposes.
 * **All Pull Requests (PRs) must be created against the `main` branch.**
-* No other branches (such as `webpage` or `release`) are used for external contributions.
+* No other branches (such as `release`) are used for external contributions.
 
 ---
 
