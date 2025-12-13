@@ -1,0 +1,180 @@
+# Vietnamese translation for io.github.redddfoxxyy.samaya.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the samaya package.
+# Loc Huynh <https://github.com/hthienloc>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: samaya\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-10 12:16+0530\n"
+"PO-Revision-Date: 2025-12-13 17:09+0700\n"
+"Last-Translator: Loc Huynh <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#: data/io.github.redddfoxxyy.samaya.desktop.in:2 data/io.github.redddfoxxyy.samaya.metainfo.xml.in:7
+#: src/samaya-application.c:63 src/samaya-window.ui:6
+msgid "Samaya"
+msgstr "Samaya"
+
+#: data/io.github.redddfoxxyy.samaya.desktop.in:8
+msgid "Productivity;Pomodoro;Timer;Time;Tracker;"
+msgstr "Productivity;Pomodoro;Timer;Time;Tracker;năng suất;bộ đếm thời gian;thời gian;theo dõi;"
+
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:8
+msgid "Timekeeper for your tasks"
+msgstr "Bộ quản lý thời gian cho công việc của bạn"
+
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:10
+msgid ""
+"A simple, elegant, minimalist Pomodoro timer for your desktop. Designed to help you stay focused and "
+"productive, it offers a clean, distraction-free interface to manage work and break intervals with ease."
+msgstr ""
+"Bộ đếm Pomodoro đơn giản, tinh tế và tối giản cho desktop. Được thiết kế để giúp bạn tập trung và làm "
+"việc hiệu quả, ứng dụng cung cấp giao diện gọn gàng, không xao nhãng để quản lý thời gian làm việc và "
+"nghỉ ngơi một cách dễ dàng."
+
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:16 src/samaya-application.c:54
+#: src/samaya-application.c:65
+msgid "Suyog Tandel"
+msgstr "Suyog Tandel"
+
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:66
+msgid "Work Session"
+msgstr "Phiên làm việc"
+
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:70 src/preferences-dialog.ui:30
+#: src/samaya-window.ui:49
+msgid "Short Break"
+msgstr "Nghỉ ngắn"
+
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:74 src/preferences-dialog.ui:45
+#: src/samaya-window.ui:55
+msgid "Long Break"
+msgstr "Nghỉ dài"
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:6
+msgid "Work session duration"
+msgstr "Thời lượng phiên làm việc"
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:7
+msgid "Duration of work sessions in minutes"
+msgstr "Thời lượng phiên làm việc tính bằng phút"
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:11
+msgid "Short break duration"
+msgstr "Thời lượng nghỉ ngắn"
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:12
+msgid "Duration of short breaks in minutes"
+msgstr "Thời lượng nghỉ ngắn tính bằng phút"
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:16
+msgid "Long break duration"
+msgstr "Thời lượng nghỉ dài"
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:17
+msgid "Duration of long breaks in minutes"
+msgstr "Thời lượng nghỉ dài tính bằng phút"
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:21
+msgid "Sessions before long break"
+msgstr "Số phiên trước khi nghỉ dài"
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:22
+msgid "Number of work sessions to complete before a long break"
+msgstr "Số phiên làm việc cần hoàn thành trước khi nghỉ dài"
+
+#: src/preferences-dialog.ui:10
+msgid "Timer Durations"
+msgstr "Thời lượng bộ đếm"
+
+#: src/preferences-dialog.ui:11
+msgid "Set the duration (in minutes) for each routine."
+msgstr "Đặt thời lượng (tính bằng phút) cho từng chu kỳ."
+
+#: src/preferences-dialog.ui:15
+msgid "Work"
+msgstr "Làm việc"
+
+#: src/preferences-dialog.ui:63
+msgid "Session Cycle"
+msgstr "Chu kỳ phiên"
+
+#: src/preferences-dialog.ui:66
+msgid "Sessions before Long Break"
+msgstr "Số phiên trước khi nghỉ dài"
+
+#: src/samaya-application.c:66
+msgid "translator-credits"
+msgstr ""
+"Vietnam Linux L10n <https://github.com/linux-l10n-vi>\n"
+"Loc Huynh <https://github.com/hthienloc>"
+
+#: src/samaya-window.c:166
+msgid "Stop"
+msgstr "Dừng"
+
+#: src/samaya-window.c:172
+msgid "Skip Session"
+msgstr "Bỏ qua phiên"
+
+#: src/samaya-window.c:178
+msgid "Resume"
+msgstr "Tiếp tục"
+
+#: src/samaya-window.c:184
+msgid "Reset Timer"
+msgstr "Đặt lại bộ đếm"
+
+#: src/samaya-window.c:190 src/samaya-window.ui:145
+msgid "Start"
+msgstr "Bắt đầu"
+
+#: src/samaya-window.ui:19
+msgid "Main Menu"
+msgstr "Menu chính"
+
+#: src/samaya-window.ui:43
+msgid "Pomodoro"
+msgstr "Pomodoro"
+
+#: src/samaya-window.ui:155
+msgid "Reset"
+msgstr "Đặt lại"
+
+#: src/samaya-window.ui:177
+msgid "_Preferences"
+msgstr "_Tùy chọn"
+
+#: src/samaya-window.ui:181
+msgid "_Keyboard Shortcuts"
+msgstr "_Phím tắt"
+
+#: src/samaya-window.ui:185
+msgid "_About Samaya"
+msgstr "_Giới thiệu Samaya"
+
+#: src/shortcuts-dialog.ui:6
+msgid "Shortcuts"
+msgstr "Phím tắt"
+
+#: src/shortcuts-dialog.ui:9
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Hiện phím tắt"
+
+#: src/shortcuts-dialog.ui:15
+msgctxt "shortcut window"
+msgid "Show Preferences"
+msgstr "Hiện tùy chọn"
+
+#: src/shortcuts-dialog.ui:21
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Thoát"
