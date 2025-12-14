@@ -8,5 +8,6 @@ src/preferences-dialog.ui
 src/samaya-application.c
 src/samaya-preferences-dialog.c
 src/samaya-window.c
+src/samaya-session.c
 src/samaya-window.ui
 src/shortcuts-dialog.ui

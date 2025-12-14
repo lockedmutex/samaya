@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: samaya\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-10 12:16+0530\n"
+"POT-Creation-Date: 2025-12-14 14:28+0530\n"
 "PO-Revision-Date: 2025-12-08 22:19+0300\n"
 "Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Türkçe <takim@gnome.org.tr>\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/io.github.redddfoxxyy.samaya.desktop.in:2
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:7
-#: src/samaya-application.c:63 src/samaya-window.ui:6
+#: src/samaya-application.c:63 src/samaya-session.c:144 src/samaya-window.ui:6
 msgid "Samaya"
 msgstr "Samaya"
 
@@ -121,25 +121,39 @@ msgstr "Uzun Moladan önceki oturumlar"
 msgid "translator-credits"
 msgstr "Sabri Ünal <yakushabb@gmail.com>"
 
-#: src/samaya-window.c:166
+#: src/samaya-window.c:218
 msgid "Stop"
 msgstr "Durdur"
 
-#: src/samaya-window.c:172
+#: src/samaya-window.c:224
 msgid "Skip Session"
 msgstr "Oturumu Atla"
 
-#: src/samaya-window.c:178
+#: src/samaya-window.c:230
 msgid "Resume"
 msgstr "Sürdür"
 
-#: src/samaya-window.c:184
+#: src/samaya-window.c:236
 msgid "Reset Timer"
 msgstr "Zamanlayıcıyı Sıfırla"
 
-#: src/samaya-window.c:190 src/samaya-window.ui:145
+#: src/samaya-window.c:242 src/samaya-window.ui:141
 msgid "Start"
 msgstr "Başlat"
+
+#: src/samaya-session.c:149
+#, fuzzy
+msgid "Focus session complete! Time for a break."
+msgstr "Uzun moladan önce tamamlanması gereken çalışma oturumu sayısı"
+
+#: src/samaya-session.c:153
+msgid "Break over! Time to get back to work."
+msgstr ""
+
+#: src/samaya-session.c:156
+#, fuzzy
+msgid "Timer finished."
+msgstr "Zamanlayıcı Süreleri"
 
 #: src/samaya-window.ui:19
 msgid "Main Menu"
@@ -149,19 +163,19 @@ msgstr "Ana Menü"
 msgid "Pomodoro"
 msgstr "Pomodoro"
 
-#: src/samaya-window.ui:155
+#: src/samaya-window.ui:151
 msgid "Reset"
 msgstr "Sıfırla"
 
-#: src/samaya-window.ui:177
+#: src/samaya-window.ui:173
 msgid "_Preferences"
 msgstr "Ter_cihler"
 
-#: src/samaya-window.ui:181
+#: src/samaya-window.ui:177
 msgid "_Keyboard Shortcuts"
 msgstr "_Klavye Kısayolları"
 
-#: src/samaya-window.ui:185
+#: src/samaya-window.ui:181
 msgid "_About Samaya"
 msgstr "Samaya _Hakkında"
 
