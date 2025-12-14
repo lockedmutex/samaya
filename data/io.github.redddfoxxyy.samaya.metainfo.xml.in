@@ -27,13 +27,13 @@
   <url type="translate">https://codeberg.org/lockedmutex/samaya/src/branch/main/po</url>
   <!-- <url type="faq">https://example.org/faq</url> -->
   <!-- Should provide a web link to an online user's reference, a software manual or help page -->
-  <!-- <url type="help">https://example.org/help</url> -->
+  <url type="help">https://matrix.to/#/#samaya:matrix.org</url>
   <!-- URLs of this type should point to a webpage showing information on how to donate to the described software project -->
   <!-- <url type="donation">https://example.org/donate</url> -->
   <!-- This could for example be an HTTPS URL to an online form or a page describing how to contact the developer -->
   <!-- <url type="contact">https://example.org/contact</url> -->
   <!-- URLs of this type should point to a webpage showing information on how to contribute to the described software project -->
-  <!-- <url type="contribute">https://example.org/contribute</url> -->
+  <url type="contribute">https://codeberg.org/lockedmutex/samaya/src/branch/main/CONTRIBUTING.md</url>
 
   <translation type="gettext">samaya</translation>
   <!-- All graphical applications having a desktop file must have this tag in the MetaInfo.
@@ -76,10 +76,23 @@
   </screenshots>
 
   <releases>
-   <release version="0.1.4" date="2025-12-10">
-     <url type="details">https://codeberg.org/lockedmutex/samaya/releases/tag/0.1.4</url>
-     <description translate="no">
-       <p>Release Changelog:</p>
+    <release version="0.1.5" date="2025-12-14">
+      <url type="details">https://codeberg.org/lockedmutex/samaya/releases/tag/0.1.5</url>
+      <description translate="no">
+        <p>Release Changelog:</p>
+        <ul>
+          <li>Add Vietnamese and Russian translations.</li>
+          <li>Update Marathi and Hindi Translations.</li>
+          <li>Fix opening preference resets the timer.</li>
+          <li>Improve Timer performance.</li>
+          <li>Smooth out progress circle animation.</li>
+        </ul>
+      </description>
+    </release>
+    <release version="0.1.4" date="2025-12-10">
+      <url type="details">https://codeberg.org/lockedmutex/samaya/releases/tag/0.1.4</url>
+      <description translate="no">
+        <p>Release Changelog:</p>
         <ul>
           <li>Add Turkish translations.</li>
           <li>Update project VCS and website link.</li>
