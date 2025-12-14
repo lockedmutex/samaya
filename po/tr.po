@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: samaya\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-14 18:38+0530\n"
-"PO-Revision-Date: 2025-12-08 22:19+0300\n"
+"POT-Creation-Date: 2025-12-14 16:35+0300\n"
+"PO-Revision-Date: 2025-12-14 17:18+0300\n"
 "Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Türkçe <takim@gnome.org.tr>\n"
 "Language: tr\n"
@@ -20,8 +20,8 @@ msgstr ""
 "X-Generator: Poedit 3.8\n"
 
 #: data/io.github.redddfoxxyy.samaya.desktop.in:2
-#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:7
-#: src/samaya-application.c:65 src/samaya-session.c:144 src/samaya-window.ui:6
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:7 src/samaya-application.c:65
+#: src/samaya-session.c:144 src/samaya-window.ui:6
 msgid "Samaya"
 msgstr "Samaya"
 
@@ -37,17 +37,17 @@ msgstr "Görevleriniz için zaman takipçisi"
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:10
 msgid ""
-"A simple, elegant, minimalist Pomodoro timer for your desktop. Designed to "
-"help you stay focused and productive, it offers a clean, distraction-free "
-"interface to manage work and break intervals with ease."
+"A simple, elegant, minimalist Pomodoro timer for your desktop. Designed to help "
+"you stay focused and productive, it offers a clean, distraction-free interface to "
+"manage work and break intervals with ease."
 msgstr ""
 "Masaüstünüz için zarif ve minimalist Pomodoro zamanlayıcı. Odaklanmanızı ve "
 "üretkenliğinizi korumak için tasarlanan bu zamanlayıcı, çalışma ve mola "
 "aralıklarını yönetmeniz için temiz ve dikkat dağıtmayan arayüz sunar."
 
 # Geliştiricinin adı
-#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:16
-#: src/samaya-application.c:54 src/samaya-application.c:67
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:16 src/samaya-application.c:54
+#: src/samaya-application.c:67
 msgid "Suyog Tandel"
 msgstr "Suyog Tandel"
 
@@ -55,13 +55,13 @@ msgstr "Suyog Tandel"
 msgid "Work Session"
 msgstr "Çalışma Oturumu"
 
-#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:70
-#: src/preferences-dialog.ui:30 src/samaya-window.ui:49
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:70 src/preferences-dialog.ui:30
+#: src/samaya-window.ui:49
 msgid "Short Break"
 msgstr "Kısa Mola"
 
-#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:74
-#: src/preferences-dialog.ui:45 src/samaya-window.ui:55
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:74 src/preferences-dialog.ui:45
+#: src/samaya-window.ui:55
 msgid "Long Break"
 msgstr "Uzun Mola"
 
@@ -99,21 +99,21 @@ msgstr "Uzun moladan önce tamamlanması gereken çalışma oturumu sayısı"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:26
 msgid "Auto-start breaks"
-msgstr ""
+msgstr "Molaları kendiliğinden başlat"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:27
-msgid ""
-"Whether to automatically start the break timer when a work session ends."
+msgid "Whether to automatically start the break timer when a work session ends."
 msgstr ""
+"Çalışma oturumu bittiğinde mola zamanlayıcısının kendiliğinden başlatılma durumu."
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:31
 msgid "Auto-start work sessions"
-msgstr ""
+msgstr "Çalışmayı kendiliğinden başlat"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:32
-msgid ""
-"Whether to automatically start the work timer when a break session ends."
+msgid "Whether to automatically start the work timer when a break session ends."
 msgstr ""
+"Mola oturumu bittiğinde iş zamanlayıcısının kendiliğinden başlatılma durumu."
 
 #: src/preferences-dialog.ui:10
 msgid "Timer Durations"
@@ -137,24 +137,23 @@ msgstr "Uzun Moladan önceki oturumlar"
 
 #: src/preferences-dialog.ui:82
 msgid "Transition Flow"
-msgstr ""
+msgstr "Geçiş Akışı"
 
 #: src/preferences-dialog.ui:85
-#, fuzzy
 msgid "Auto Start Breaks"
-msgstr "Kısa Mola"
+msgstr "Kısa Molaları Kendiliğinden Başlat"
 
 #: src/preferences-dialog.ui:86
 msgid "Automatically start break routine after work session ends."
-msgstr ""
+msgstr "Çalışma oturumu bittikten sonra mola rutinini kendiliğinden başlat."
 
 #: src/preferences-dialog.ui:92
 msgid "Auto Start Work"
-msgstr ""
+msgstr "Çalışmayı Kendiliğinden Başlat"
 
 #: src/preferences-dialog.ui:93
 msgid "Automatically start work routine after break ends."
-msgstr ""
+msgstr "Mola bittikten sonra iş rutinini kendiliğinden başlat."
 
 #: src/samaya-application.c:68
 msgid "translator-credits"
@@ -181,18 +180,16 @@ msgid "Start"
 msgstr "Başlat"
 
 #: src/samaya-session.c:149
-#, fuzzy
 msgid "Focus session complete! Time for a break."
-msgstr "Uzun moladan önce tamamlanması gereken çalışma oturumu sayısı"
+msgstr "Odaklanma oturumu tamamlandı! Mola zamanı."
 
 #: src/samaya-session.c:153
 msgid "Break over! Time to get back to work."
-msgstr ""
+msgstr "Mola bitti. Çalışmaya dönme zamanı."
 
 #: src/samaya-session.c:156
-#, fuzzy
 msgid "Timer finished."
-msgstr "Zamanlayıcı Süreleri"
+msgstr "Zamanlayıcı bitti."
 
 #: src/samaya-window.ui:19
 msgid "Main Menu"
@@ -228,10 +225,9 @@ msgid "Show Shortcuts"
 msgstr "Kısayolları Göster"
 
 #: src/shortcuts-dialog.ui:15
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr "Ter_cihler"
+msgstr "Tercihleri Göster"
 
 #: src/shortcuts-dialog.ui:21
 msgctxt "shortcut window"
