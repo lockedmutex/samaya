@@ -20,6 +20,8 @@
 
 #include "samaya-session.h"
 #include "samaya-timer.h"
+#include <gio/gio.h>
+#include <glib/gi18n.h>
 
 
 /* ============================================================================
@@ -56,6 +58,8 @@ SessionManagerPtr sm_get_default(void)
 
 static void play_completion_sound(GSoundContext *g_sound_ctx);
 
+static void display_notification(SessionManagerPtr session_manager);
+
 static void sm_format_time(SessionManagerPtr self, gint64 timeMS);
 
 
@@ -71,13 +75,20 @@ static void on_timer_tick(gpointer remaining_time_ms)
     }
 
     sm_format_time(session_manager, *(guint64 *) remaining_time_ms);
-    g_idle_add(session_manager->sm_timer_tick_callback, session_manager->user_data);
+
+    if (session_manager->sm_timer_tick_callback) {
+        session_manager->sm_timer_tick_callback(session_manager->user_data);
+    }
 }
 
-static void on_session_complete(gpointer timer)
+static void on_session_complete(gpointer notify)
 {
     SessionManagerPtr session_manager = sm_get_default();
-    play_completion_sound(session_manager->gsound_ctx);
+
+    if (notify != NULL) {
+        play_completion_sound(session_manager->gsound_ctx);
+        display_notification(session_manager);
+    }
 
     switch (session_manager->current_routine) {
         case Working:
@@ -114,13 +125,47 @@ static void play_completion_sound(GSoundContext *g_sound_ctx)
 
     GError *error = NULL;
     gboolean ok = gsound_context_play_simple(g_sound_ctx,
-                                             NULL, // no cancellable
+                                             NULL,
                                              &error, GSOUND_ATTR_EVENT_ID, "bell-terminal", NULL);
 
     if (!ok) {
         g_warning("Failed to play sound: %s", error->message);
         g_error_free(error);
     }
+}
+
+static void display_notification(SessionManagerPtr session_manager)
+{
+    GApplication *app = G_APPLICATION(session_manager->user_data);
+    if (app == NULL){
+        return;
+    }
+
+    const char *title = _("Samaya");
+    const char *body = NULL;
+
+    switch (session_manager->current_routine) {
+        case Working:
+            body = _("Focus session complete! Time for a break.");
+            break;
+        case ShortBreak:
+        case LongBreak:
+            body = _("Break over! Time to get back to work.");
+            break;
+        default:
+            body = _("Timer finished.");
+            break;
+    }
+
+    GNotification *note = g_notification_new(title);
+    g_notification_set_body(note, body);
+    g_notification_set_priority(note, G_NOTIFICATION_PRIORITY_HIGH);
+    
+    g_notification_set_default_action(note, "app.activate");
+
+    g_application_send_notification(app, "timer-complete", note);
+    g_object_unref(note);
+    
 }
 
 static void sm_format_time(SessionManagerPtr self, gint64 timeMS)

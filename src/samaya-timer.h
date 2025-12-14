@@ -44,10 +44,8 @@ typedef void (*TmCallback)(gpointer callback_data);
 
 struct Timer
 {
-    GMutex tm_mutex;
-
+    guint tick_source_id;
     TmState tm_state;
-    GCond tm_running_cond;
 
     guint64 initial_time_ms;
     guint64 remaining_time_ms;
@@ -55,7 +53,6 @@ struct Timer
 
     gfloat timer_progress;
 
-    GThread *tm_machine_thread;
     guint32 tm_sleep_time_ms;
 
     TmCallback tm_time_update;

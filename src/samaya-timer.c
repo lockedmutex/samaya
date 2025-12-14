@@ -27,6 +27,8 @@
  * Internal Implementation
  * ============================================================================ */
 
+static gboolean tm_run_tick(gpointer user_data);
+
 typedef void (*TmTransitionAction)(TimerPtr self);
 
 typedef struct
@@ -37,47 +39,94 @@ typedef struct
     TmTransitionAction action;
 } TmStateTransition;
 
-static void tm_lock(TimerPtr self)
+static void update_progress(TimerPtr self)
 {
-    g_mutex_lock(&self->tm_mutex);
-}
-
-static void tm_unlock(TimerPtr self)
-{
-    g_mutex_unlock(&self->tm_mutex);
-}
-
-static void action_sync_time(TimerPtr self)
-{
-    g_cond_signal(&self->tm_running_cond);
-    guint64 remaining_time_ms = self->remaining_time_ms;
-    if (self->tm_time_update) {
-        self->tm_time_update(&remaining_time_ms);
+    if (self->initial_time_ms > 0) {
+        self->timer_progress =
+            (gfloat) self->remaining_time_ms / (gfloat) self->initial_time_ms;
+    } else {
+        self->timer_progress = 0.0f;
     }
+}
+
+static gfloat get_instant_progress(TimerPtr self)
+{
+    if (self->initial_time_ms <= 0) return 0.0f;
+
+    guint64 current_time_us = g_get_monotonic_time();
+    guint64 elapsed_since_update_us = guint64_sat_sub(current_time_us, self->last_updated_time_us);
+    
+    guint64 elapsed_since_update_ms = elapsed_since_update_us / 1000;
+
+    guint64 real_remaining_ms = guint64_sat_sub(self->remaining_time_ms, elapsed_since_update_ms);
+
+    return (gfloat) real_remaining_ms / (gfloat) self->initial_time_ms;
+}
+
+static void notify_time_update(TimerPtr self)
+{
+    guint64 remaining = self->remaining_time_ms;
+    if (self->tm_time_update) {
+        self->tm_time_update(&remaining);
+    }
+}
+
+static void action_start_timer(TimerPtr self)
+{
     self->last_updated_time_us = g_get_monotonic_time();
+    
+    if (self->tick_source_id > 0) {
+        g_source_remove(self->tick_source_id);
+    }
+    
+    self->tick_source_id = g_timeout_add(1000, tm_run_tick, self);
+}
+
+// TODO: This function, tm_run_tick and get_instant_progress all are basically doing the same calcualation but code is
+// repeated again and again in all 3. Make a single function for this and call that function instead.
+static void action_stop_timer(TimerPtr self)
+{
+    guint64 current_time_us = g_get_monotonic_time();
+    guint64 elapsed_time_us = guint64_sat_sub(current_time_us, self->last_updated_time_us);
+    
+    gint64 elapsed_time_ms = elapsed_time_us / 1000;
+    self->remaining_time_ms = guint64_sat_sub(self->remaining_time_ms, elapsed_time_ms);
+    
+    update_progress(self);
+    notify_time_update(self);
+
+    if (self->tick_source_id > 0) {
+        g_source_remove(self->tick_source_id);
+        self->tick_source_id = 0;
+    }
 }
 
 static void action_reset(TimerPtr self)
 {
+    action_stop_timer(self);
+    
     self->remaining_time_ms = self->initial_time_ms;
     self->timer_progress = 1.0f;
-    guint64 remaining_time_ms = self->remaining_time_ms;
-    if (self->tm_time_update) {
-        self->tm_time_update(&remaining_time_ms);
-    }
+    
+    notify_time_update(self);
     g_info("Session Reset");
+}
+
+static void action_sync_time(TimerPtr self) {
+    self->last_updated_time_us = g_get_monotonic_time();
+    action_start_timer(self);
 }
 
 // clang-format off
 static const TmStateTransition tmStateTransitionMatrix[] = {
-    {StIdle,    EvStart,    StRunning,  action_sync_time },
-    {StIdle,    EvReset,    StIdle,     action_sync_time },
-    {StRunning, EvStart,    StRunning,  NULL             },
-    {StRunning, EvReset,    StIdle,     action_reset     },
-    {StRunning, EvStop,     StPaused,   NULL             },
-    {StPaused,  EvStart,    StRunning,  action_sync_time },
-    {StPaused,  EvStop,     StPaused,   action_sync_time },
-    {StPaused,  EvReset,    StIdle,     action_reset     }
+    {StIdle,    EvStart,    StRunning,  action_start_timer },
+    {StIdle,    EvReset,    StIdle,     action_reset       },
+    {StRunning, EvStart,    StRunning,  NULL               },
+    {StRunning, EvReset,    StIdle,     action_reset       },
+    {StRunning, EvStop,     StPaused,   action_stop_timer  },
+    {StPaused,  EvStart,    StRunning,  action_sync_time   },
+    {StPaused,  EvStop,     StPaused,   NULL               },
+    {StPaused,  EvReset,    StIdle,     action_reset       }
 };
 // clang-format on
 
@@ -99,82 +148,44 @@ static void tm_process_transition(TimerPtr self, TmEvent event)
         return;
     }
 
+    self->tm_state = transition->next_state;
+
     if (transition->action != NULL) {
         transition->action(self);
     }
-
-    self->tm_state = transition->next_state;
 }
 
-static gboolean tm_run_tick(TimerPtr self)
+static gboolean tm_run_tick(gpointer timer_ptr)
 {
-    switch (self->tm_state) {
-        default:
-        case StExited:
-            return FALSE;
+    TimerPtr self = timer_ptr;
 
-        case StIdle:
-        case StPaused:
-            tm_lock(self);
-            g_cond_wait((&self->tm_running_cond), &self->tm_mutex);
-            tm_unlock(self);
-            return TRUE;
-
-        case StRunning:
-            tm_lock(self);
-
-            guint64 current_time_us = (guint64) g_get_monotonic_time();
-            guint64 elapsed_time_us = guint64_sat_sub(current_time_us, self->last_updated_time_us);
-            self->last_updated_time_us = current_time_us;
-
-            gint64 elapsed_time_ms = elapsed_time_us / 1000;
-            self->remaining_time_ms = guint64_sat_sub(self->remaining_time_ms, elapsed_time_ms);
-
-            if (self->initial_time_ms > 0) {
-                self->timer_progress =
-                    (gfloat) self->remaining_time_ms / (gfloat) self->initial_time_ms;
-            } else {
-                self->timer_progress = 0.0f;
-            }
-
-            gint64 current_remaining_time_ms = self->remaining_time_ms;
-
-            if (self->tm_time_update) {
-                self->tm_time_update(&current_remaining_time_ms);
-            }
-
-            if (self->remaining_time_ms == 0) {
-                self->tm_state = StIdle;
-                tm_unlock(self);
-
-                if (self->tm_time_complete) {
-                    self->tm_time_complete(self);
-                }
-                return TRUE;
-            }
-
-            tm_unlock(self);
-            g_usleep((gulong) self->tm_sleep_time_ms * 1000UL);
-
-            return TRUE;
+    if (self->tm_state != StRunning) {
+        self->tick_source_id = 0;
+        return G_SOURCE_REMOVE;
     }
+
+    guint64 current_time_us = g_get_monotonic_time();
+    guint64 elapsed_time_us = guint64_sat_sub(current_time_us, self->last_updated_time_us);
+    self->last_updated_time_us = current_time_us;
+
+    gint64 elapsed_time_ms = elapsed_time_us / 1000;
+    self->remaining_time_ms = guint64_sat_sub(self->remaining_time_ms, elapsed_time_ms);
+
+    update_progress(self);
+    notify_time_update(self);
+
+    if (self->remaining_time_ms == 0) {
+        self->tm_state = StIdle;
+        self->tick_source_id = 0;
+
+        if (self->tm_time_complete) {
+            self->tm_time_complete(self);
+        }
+        return G_SOURCE_REMOVE;
+    }
+
+    return G_SOURCE_CONTINUE;
 }
-
-static gpointer tm_loop_entry(gpointer timer_instance)
-{
-    TimerPtr timer = timer_instance;
-
-    if (timer == NULL) {
-        g_critical("Timer has not been initialised, timer thread creation failed.");
-        return NULL;
-    }
-
-    while (tm_run_tick(timer)) {
-    }
-
-    return NULL;
-}
-
 
 /* ============================================================================
  * Public API
@@ -185,17 +196,11 @@ TimerPtr tm_new(float duration_minutes, TmCallback time_complete, TmCallback tim
 {
     TimerPtr timer = g_new0(Timer, 1);
 
-    g_mutex_init(&timer->tm_mutex);
-    g_cond_init(&timer->tm_running_cond);
-
-    timer->tm_sleep_time_ms = 200;
     timer->initial_time_ms = (gint64) (duration_minutes * 60 * 1000);
     timer->remaining_time_ms = timer->initial_time_ms;
     timer->timer_progress = 1.0F;
 
     timer->tm_state = StIdle;
-
-    timer->tm_machine_thread = g_thread_new("timer-thread", tm_loop_entry, timer);
 
     timer->tm_time_update = time_update;
     timer->tm_time_complete = time_complete;
@@ -206,68 +211,43 @@ TimerPtr tm_new(float duration_minutes, TmCallback time_complete, TmCallback tim
 
 void tm_free(Timer *self)
 {
-    tm_lock(self);
-
-    self->tm_state = StExited;
-    g_cond_signal(&self->tm_running_cond);
-
+    if (self->tick_source_id > 0) {
+        g_source_remove(self->tick_source_id);
+    }
+    
     self->tm_time_update = NULL;
     self->tm_time_complete = NULL;
-    GThread *thread_to_join = self->tm_machine_thread;
-    self->tm_machine_thread = NULL;
-
-    tm_unlock(self);
-
-    if (thread_to_join) {
-        g_thread_join(thread_to_join);
-    }
-
-    g_cond_clear(&self->tm_running_cond);
-    g_mutex_clear(&self->tm_mutex);
-
+    
     g_free(self);
 }
 
 void tm_trigger_event(TimerPtr self, TmEvent event)
 {
-    tm_lock(self);
     tm_process_transition(self, event);
-    tm_unlock(self);
 }
 
 TmState tm_get_state(TimerPtr self)
 {
-    tm_lock(self);
-    TmState current_state = self->tm_state;
-    tm_unlock(self);
-    return current_state;
+    return self->tm_state;
 }
 
 gfloat tm_get_progress(TimerPtr self)
 {
-    tm_lock(self);
-    gfloat timer_progress = self->timer_progress;
-    tm_unlock(self);
-
-    return timer_progress;
+    if (self->tm_state == StRunning) {
+        return get_instant_progress(self);
+    }
+    return self->timer_progress;
 }
 
 gint64 tm_get_remaining_time_ms(TimerPtr self)
 {
-    tm_lock(self);
-    gint64 remaining_time = self->remaining_time_ms;
-    tm_unlock(self);
-    return remaining_time;
+    return self->remaining_time_ms;
 }
 
 void tm_set_duration(TimerPtr self, gfloat initial_time_minutes)
 {
-    tm_lock(self);
     self->initial_time_ms = (guint64) (initial_time_minutes * 60 * 1000);
     self->remaining_time_ms = self->initial_time_ms;
-    guint64 remaining_time_ms = self->remaining_time_ms;
-    if (self->tm_time_update) {
-        self->tm_time_update(&remaining_time_ms);
-    }
-    tm_unlock(self);
+    
+    notify_time_update(self);
 }

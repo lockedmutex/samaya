@@ -38,6 +38,8 @@ struct _SamayaWindow
 
     GtkButton *start_button;
     GtkButton *reset_button;
+
+    guint tick_callback_id;
 };
 
 G_DEFINE_FINAL_TYPE(SamayaWindow, samaya_window, ADW_TYPE_APPLICATION_WINDOW)
@@ -58,6 +60,39 @@ static void sync_button_state(SamayaWindow *self);
 /* ============================================================================
  * UI Actions
  * ============================================================================ */
+
+static gboolean on_animate_progress(GtkWidget *widget, GdkFrameClock *frame_clock, gpointer user_data)
+{
+    SamayaWindow *self = SAMAYA_WINDOW(user_data);
+    
+    gtk_widget_queue_draw(GTK_WIDGET(self->progress_circle));
+    
+    return G_SOURCE_CONTINUE;
+}
+
+static void update_animation_state(SamayaWindow *self)
+{
+    TimerPtr timer = sm_get_default()->timer_instance;
+    TmState state = tm_get_state(timer);
+
+    if (state == StRunning) {
+        if (self->tick_callback_id == 0) {
+            self->tick_callback_id = gtk_widget_add_tick_callback(
+                GTK_WIDGET(self->progress_circle), 
+                on_animate_progress, 
+                self, 
+                NULL
+            );
+        }
+    } else {
+        if (self->tick_callback_id > 0) {
+            gtk_widget_remove_tick_callback(GTK_WIDGET(self->progress_circle), self->tick_callback_id);
+            self->tick_callback_id = 0;
+        }
+
+        gtk_widget_queue_draw(GTK_WIDGET(self->progress_circle));
+    }
+}
 
 static void update_timer_font_size(GtkWidget *label, const char *time_text) {
     guint len = strlen(time_text);
@@ -117,9 +152,9 @@ static gboolean on_tick_update(gpointer user_data)
 
     if (timer != NULL) {
         char *formatted_time = sm_get_formatted_time(session_manager);
+        
         gtk_label_set_text(self->timer_label, formatted_time);
         update_timer_font_size(GTK_WIDGET(self->timer_label), formatted_time);
-        gtk_widget_queue_draw(GTK_WIDGET(self->progress_circle));
     }
 
     char *session_text =
@@ -217,6 +252,8 @@ static void sync_button_state(SamayaWindow *self)
             gtk_widget_set_sensitive(reset_btn_widget, FALSE);
             break;
     }
+
+    update_animation_state(self);
 }
 
 static void on_routine_toggled(AdwToggleGroup *toggle_group, GParamSpec *pspec,
