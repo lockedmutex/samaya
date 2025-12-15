@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <interface>
-    <requires lib="gtk" version="4.0"/>
-    <requires lib="Adw" version="1.0"/>
+    <requires lib="gtk" version="4.0" />
+    <requires lib="Adw" version="1.0" />
     <template class="SamayaWindow" parent="AdwApplicationWindow">
         <property name="title" translatable="yes">Samaya</property>
         <property name="default-width">360</property>
@@ -36,7 +36,7 @@
                                     <object class="AdwToggleGroup" id="routine_toggle_group">
                                         <property name="active-name">pomodoro</property>
                                         <style>
-                                            <class name="round"/>
+                                            <class name="round" />
                                         </style>
                                         <child>
                                             <object class="AdwToggle">
@@ -92,7 +92,7 @@
                                                         <property name="opacity">0</property>
                                                         <property name="margin-bottom">4</property>
                                                         <style>
-                                                            <class name="title-4"/>
+                                                            <class name="title-4" />
                                                         </style>
                                                     </object>
                                                 </child>
@@ -103,8 +103,12 @@
                                                         <property name="label">25:00</property>
                                                         <property name="halign">center</property>
                                                         <style>
-                                                            <class name="numeric"/>
+                                                            <class name="numeric" />
+                                                            <class name="title-1" />
                                                         </style>
+                                                        <attributes>
+                                                            <attribute name="scale" value="2.2" />
+                                                        </attributes>
                                                     </object>
                                                 </child>
 
@@ -115,8 +119,8 @@
                                                         <property name="halign">center</property>
                                                         <property name="margin-top">4</property>
                                                         <style>
-                                                            <class name="title-4"/>
-                                                            <class name="dim-label"/>
+                                                            <class name="title-4" />
+                                                            <class name="dim-label" />
                                                         </style>
                                                     </object>
                                                 </child>
@@ -141,8 +145,8 @@
                                         <property name="label" translatable="yes">Start</property>
                                         <property name="action-name">win.start-timer</property>
                                         <style>
-                                            <class name="pill"/>
-                                            <class name="suggested-action"/>
+                                            <class name="pill" />
+                                            <class name="suggested-action" />
                                         </style>
                                     </object>
                                 </child>
@@ -153,8 +157,8 @@
                                         <property name="width-request">44</property>
                                         <property name="height-request">44</property>
                                         <style>
-                                            <class name="circular"/>
-                                            <class name="destructive-action"/>
+                                            <class name="circular" />
+                                            <class name="destructive-action" />
                                         </style>
                                     </object>
                                 </child>

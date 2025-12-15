@@ -73,21 +73,3 @@
 .routine-long-break {
     color: @orange_2;
 }
-
-/* two digit */
-.timer-len-short {
-    font-size: 66px; 
-    font-weight: 800;
-}
-
-/* three digit */
-.timer-len-medium {
-    font-size: 56px;
-    font-weight: 800;
-}
-
-/* four digit */
-.timer-len-long {
-    font-size: 48px;
-    font-weight: 800;
-}

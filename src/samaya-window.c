@@ -18,12 +18,12 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-#include "samaya-window.h"
 #include <glib/gi18n.h>
 #include <math.h>
 #include "samaya-application.h"
 #include "samaya-session.h"
 #include "samaya-timer.h"
+#include "samaya-window.h"
 
 struct _SamayaWindow
 {
@@ -92,23 +92,6 @@ static void update_animation_state(SamayaWindow *self)
     }
 }
 
-static void update_timer_font_size(GtkWidget *label, const char *time_text)
-{
-    guint len = strlen(time_text);
-
-    gtk_widget_remove_css_class(label, "timer-len-short");
-    gtk_widget_remove_css_class(label, "timer-len-medium");
-    gtk_widget_remove_css_class(label, "timer-len-long");
-
-    if (len > 6) {
-        gtk_widget_add_css_class(label, "timer-len-long");
-    } else if (len > 5) {
-        gtk_widget_add_css_class(label, "timer-len-medium");
-    } else {
-        gtk_widget_add_css_class(label, "timer-len-short");
-    }
-}
-
 static void sync_progress_style(SamayaWindow *self)
 {
     SessionManagerPtr session_manager = sm_get_default();
@@ -153,7 +136,6 @@ static gboolean on_tick_update(gpointer user_data)
         char *formatted_time = sm_get_formatted_time(session_manager);
 
         gtk_label_set_text(self->timer_label, formatted_time);
-        update_timer_font_size(GTK_WIDGET(self->timer_label), formatted_time);
     }
 
     char *session_text =
