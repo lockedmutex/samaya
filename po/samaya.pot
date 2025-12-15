@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: samaya\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-15 11:08+0530\n"
+"POT-Creation-Date: 2025-12-15 19:03+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -170,23 +170,23 @@ msgstr ""
 msgid "Timer finished."
 msgstr ""
 
-#: src/samaya-window.c:215
+#: src/samaya-window.c:197
 msgid "Stop"
 msgstr ""
 
-#: src/samaya-window.c:221
+#: src/samaya-window.c:203
 msgid "Skip Session"
 msgstr ""
 
-#: src/samaya-window.c:227
+#: src/samaya-window.c:209
 msgid "Resume"
 msgstr ""
 
-#: src/samaya-window.c:233
+#: src/samaya-window.c:215
 msgid "Reset Timer"
 msgstr ""
 
-#: src/samaya-window.c:239 src/samaya-window.ui:141
+#: src/samaya-window.c:221 src/samaya-window.ui:145
 msgid "Start"
 msgstr ""
 
@@ -198,19 +198,19 @@ msgstr ""
 msgid "Pomodoro"
 msgstr ""
 
-#: src/samaya-window.ui:151
+#: src/samaya-window.ui:155
 msgid "Reset"
 msgstr ""
 
-#: src/samaya-window.ui:173
+#: src/samaya-window.ui:177
 msgid "_Preferences"
 msgstr ""
 
-#: src/samaya-window.ui:177
+#: src/samaya-window.ui:181
 msgid "_Keyboard Shortcuts"
 msgstr ""
 
-#: src/samaya-window.ui:181
+#: src/samaya-window.ui:185
 msgid "_About Samaya"
 msgstr ""
 
