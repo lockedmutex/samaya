@@ -1,6 +1,6 @@
 /* samaya-application.c
  *
- * Copyright 2025 Suyog Tandel
+ * Copyright 2025-2026 Suyog Tandel
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -68,7 +68,7 @@ static void samaya_application_about_action(GSimpleAction *action, GVariant *par
         "application-icon", "io.github.redddfoxxyy.samaya",
         "developer-name", _("Suyog Tandel"),
         "translator-credits", _("translator-credits"),
-        "version", "0.1.6",
+        "version", "0.1.7",
         "developers", developers,
         "artists", artists,
         "website", "https://samaya.suyogtandel.in/",

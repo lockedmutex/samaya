@@ -134,7 +134,7 @@ the [LICENSE](LICENSE) file for details.
 Contributions made by all contributors are licensed strictly under **GNU AGPL v3.0 only**.
 
 ```
-    Copyright (C) 2025  lockedmutex(Suyog Tandel)
+    Copyright (C) 2025-2026  Suyog Tandel
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as

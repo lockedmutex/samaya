@@ -76,6 +76,15 @@
   </screenshots>
 
   <releases>
+    <release version="0.1.7" date="2026-01-07">
+      <url type="details">https://codeberg.org/lockedmutex/samaya/releases/tag/0.1.7</url>
+      <description translate="no">
+        <p>Release Changelog:</p>
+        <ul>
+          <li>Add Dutch translations.</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.1.6" date="2025-12-15">
       <url type="details">https://codeberg.org/lockedmutex/samaya/releases/tag/0.1.6</url>
       <description translate="no">
