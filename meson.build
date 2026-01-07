@@ -1,7 +1,7 @@
 project(
 	'samaya',
 	'c',
-	version: '0.1.7',
+	version: '0.1.8',
 	meson_version: '>= 1.0.0',
 	default_options: [
 		'warning_level=2',
