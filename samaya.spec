@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 Name:           samaya
 Version:        1.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Timekeeper for your tasks
 
 License:        AGPL-3.0-or-later
@@ -55,6 +55,8 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.xml
 %{_datadir}/icons/hicolor/symbolic/apps/*.svg
 %{_datadir}/metainfo/*.xml
 %{_datadir}/glib-2.0/schemas/*.gschema.xml
+%{_datadir}/dbus-1/services/*.service
+%{_datadir}/sounds/*.oga
 
 %changelog
 * Sun Jan 18 2026 Suyog Tandel <git@suyogtandel.in> 1.0.0-1
