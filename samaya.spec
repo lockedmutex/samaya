@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 Name:           samaya
 Version:        1.0.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Timekeeper for your tasks
 
 License:        AGPL-3.0-or-later
 URL:            https://codeberg.org/lockedmutex/samaya
-Source0:        %{url}/archive/v%{version}.tar.gz
+Source0:        %{name}-%{version}.tar.gz
 
 BuildRequires:  meson
 BuildRequires:  gcc
