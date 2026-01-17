@@ -59,6 +59,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.xml
 %{_datadir}/sounds/*.oga
 
 %changelog
+* Sun Jan 18 2026 Suyog Tandel <git@suyogtandel.in> 1.0.0-2
+- fix: add all files in spec file (git@suyogtandel.in)
+
 * Sun Jan 18 2026 Suyog Tandel <git@suyogtandel.in> 1.0.0-1
 - new package built with tito
 
