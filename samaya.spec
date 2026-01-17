@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 Name:           samaya
 Version:        1.0.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Timekeeper for your tasks
 
 License:        AGPL-3.0-or-later
@@ -32,7 +32,7 @@ Designed to help you stay focused and productive, it offers a clean,
 distraction-free interface to manage work and break intervals with ease.
 
 %prep
-%autosetup -n %{name} -p1
+%autosetup -p1
 
 %build
 %meson
