@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 Name:           samaya
 Version:        1.0.0
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Timekeeper for your tasks
 
 License:        AGPL-3.0-or-later
@@ -13,8 +13,8 @@ BuildRequires:  gcc
 BuildRequires:  gettext
 
 # Dependencies based on your README and ldd output
-BuildRequires:  pkgconfig(gtk4) >= 4.20
-BuildRequires:  pkgconfig(libadwaita-1) >= 1.8
+BuildRequires:  pkgconfig(gtk4) >= 4.16
+BuildRequires:  pkgconfig(libadwaita-1) >= 1.6
 BuildRequires:  pkgconfig(gsound) >= 1.0.3
 BuildRequires:  pkgconfig(libcanberra) >= 0.30
 BuildRequires:  pkgconfig(gio-2.0)
