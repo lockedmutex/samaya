@@ -22,7 +22,7 @@ BuildRequires:  pkgconfig(glib-2.0)
 
 # Validation tools
 BuildRequires:  desktop-file-utils
-BuildRequires:  libappstream-glib
+BuildRequires:  /usr/bin/appstream-util
 
 Requires:       hicolor-icon-theme
 
