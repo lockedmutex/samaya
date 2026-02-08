@@ -1,0 +1,223 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the samaya package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr "Project-Id-Version: samaya\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2025-12-15 19:03+0530\nPO-Revision-Date: 2026-02-08 10:29+0000\nLast-Translator: artnay <artnay@noreply.codeberg.org>\nLanguage-Team: Finnish <https://translate.codeberg.org/projects/samaya/samaya/fi/>\nLanguage: fi\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.15.2\n"
+
+#: data/io.github.redddfoxxyy.samaya.desktop.in:2
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:7
+#: src/samaya-application.c:67 src/samaya-session.c:146 src/samaya-window.ui:6
+msgid "Samaya"
+msgstr "Samaya"
+
+#: data/io.github.redddfoxxyy.samaya.desktop.in:8
+msgid "Productivity;Pomodoro;Timer;Time;Tracker;"
+msgstr "Productivity;Pomodoro;Timer;Time;Tracker;tuottavuus;ajastin;ajanlaskenta;seuranta;"
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:6
+msgid "Work session duration"
+msgstr "Työskentelyistunnon kesto"
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:7
+msgid "Duration of work sessions in minutes"
+msgstr "Työskentelyistunnon kesto minuuteissa"
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:11
+msgid "Short break duration"
+msgstr "Lyhyen tauon kesto"
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:12
+msgid "Duration of short breaks in minutes"
+msgstr "Lyhyen tauon kesto minuuteissa"
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:16
+msgid "Long break duration"
+msgstr "Pitkän tauon kesto"
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:17
+msgid "Duration of long breaks in minutes"
+msgstr "Pitkän tauon kesto minuuteissa"
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:21
+msgid "Sessions before long break"
+msgstr "Istuntoja ennen pitkää taukoa"
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:22
+msgid "Number of work sessions to complete before a long break"
+msgstr "Suoritettujen työskentelyistuntojen määrä ennen pitkää taukoa"
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:26
+msgid "Auto-start breaks"
+msgstr "Aloita tauot automaattisesti"
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:27
+msgid ""
+"Whether to automatically start the break timer when a work session ends."
+msgstr "Käynnistetäänkö taukoajastin automaattisesti työskentelyistunnon päättyessä."
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:31
+msgid "Auto-start work sessions"
+msgstr "Aloita työskentelyistunnot automaattisesti"
+
+#: data/io.github.redddfoxxyy.samaya.gschema.xml:32
+msgid ""
+"Whether to automatically start the work timer when a break session ends."
+msgstr "Käynnistetäänkö työskentelyajastin automaattisesti taukoistunnon päättyessä."
+
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:8
+msgid "Timekeeper for your tasks"
+msgstr "Tehtävien ajanseuranta"
+
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:10
+msgid ""
+"A simple, elegant, minimalist Pomodoro timer for your desktop. Designed to "
+"help you stay focused and productive, it offers a clean, distraction-free "
+"interface to manage work and break intervals with ease."
+msgstr "Yksinkertainen, hienostunut ja minimalistinen Pomodoro-ajastin. Auttaa keskittymään ja pysymään tuottavana; tarjoaa häiriövapaan käyttöliittymän työskentely- ja taukojaksojen ajanseurantaan."
+
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:16
+#: src/samaya-application.c:54 src/samaya-application.c:56
+#: src/samaya-application.c:69
+msgid "Suyog Tandel"
+msgstr "Suyog Tandel"
+
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:66
+msgid "Work Session"
+msgstr "Työskentelyistunto"
+
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:70
+#: src/preferences-dialog.ui:30 src/samaya-window.ui:49
+msgid "Short Break"
+msgstr "Lyhyt tauko"
+
+#: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:74
+#: src/preferences-dialog.ui:45 src/samaya-window.ui:55
+msgid "Long Break"
+msgstr "Pitkä tauko"
+
+#: src/preferences-dialog.ui:10
+msgid "Timer Durations"
+msgstr "Ajastimen kestot"
+
+#: src/preferences-dialog.ui:11
+msgid "Set the duration (in minutes) for each routine."
+msgstr "Aseta kesto minuuteissa jokaiselle rutiinille."
+
+#: src/preferences-dialog.ui:15
+msgid "Work"
+msgstr "Työ"
+
+#: src/preferences-dialog.ui:63
+msgid "Session Cycle"
+msgstr "Istuntojen kierto"
+
+#: src/preferences-dialog.ui:66
+msgid "Sessions before Long Break"
+msgstr "Istuntoja ennen pitkää taukoa"
+
+#: src/preferences-dialog.ui:82
+msgid "Transition Flow"
+msgstr "Siirtymien kulku"
+
+#: src/preferences-dialog.ui:85
+msgid "Auto Start Breaks"
+msgstr "Aloita tauot automaattisesti"
+
+#: src/preferences-dialog.ui:86
+msgid "Automatically start break routine after work session ends."
+msgstr "Käynnistä taukorutiini automaattisesti työskentelyistunnon päättyessä."
+
+#: src/preferences-dialog.ui:92
+msgid "Auto Start Work"
+msgstr "Aloita työskentely automaattisesti"
+
+#: src/preferences-dialog.ui:93
+msgid "Automatically start work routine after break ends."
+msgstr "Käynnistä työrutiini automaattisesti tauon päättyessä."
+
+#: src/samaya-application.c:56
+msgid ""
+"Completion Sound:\n"
+"Dr. Richard Boulanger et al (CC-BY 3.0)"
+msgstr "Valmistumisen ääni:\nDr. Richard Boulanger et al (CC-BY 3.0)"
+
+#: src/samaya-application.c:70
+msgid "translator-credits"
+msgstr "Jiri Grönroos"
+
+#: src/samaya-session.c:151
+msgid "Focus session complete! Time for a break."
+msgstr "Keskittymisen istunto valmistui! Tauon aika."
+
+#: src/samaya-session.c:155
+msgid "Break over! Time to get back to work."
+msgstr "Tauko on ohi! Aika palata töihin."
+
+#: src/samaya-session.c:158
+msgid "Timer finished."
+msgstr "Ajastin valmistui."
+
+#: src/samaya-window.c:197
+msgid "Stop"
+msgstr "Pysäytä"
+
+#: src/samaya-window.c:203
+msgid "Skip Session"
+msgstr "Ohita istunto"
+
+#: src/samaya-window.c:209
+msgid "Resume"
+msgstr "Jatka"
+
+#: src/samaya-window.c:215
+msgid "Reset Timer"
+msgstr "Nollaa ajastin"
+
+#: src/samaya-window.c:221 src/samaya-window.ui:145
+msgid "Start"
+msgstr "Käynnistä"
+
+#: src/samaya-window.ui:19
+msgid "Main Menu"
+msgstr "Päävalikko"
+
+#: src/samaya-window.ui:43
+msgid "Pomodoro"
+msgstr "Pomodoro"
+
+#: src/samaya-window.ui:155
+msgid "Reset"
+msgstr "Nollaa"
+
+#: src/samaya-window.ui:177
+msgid "_Preferences"
+msgstr "_Asetukset"
+
+#: src/samaya-window.ui:181
+msgid "_Keyboard Shortcuts"
+msgstr "_Pikanäppäimet"
+
+#: src/samaya-window.ui:185
+msgid "_About Samaya"
+msgstr "_Tietoja - Samaya"
+
+#: src/shortcuts-dialog.ui:6
+msgid "Shortcuts"
+msgstr "Pikanäppäimet"
+
+#: src/shortcuts-dialog.ui:9
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Näytä pikanäppäimet"
+
+#: src/shortcuts-dialog.ui:15
+msgctxt "shortcut window"
+msgid "Show Preferences"
+msgstr "Näytä asetukset"
+
+#: src/shortcuts-dialog.ui:21
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Lopeta"
