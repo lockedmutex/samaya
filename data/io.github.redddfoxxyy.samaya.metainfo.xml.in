@@ -8,8 +8,16 @@
   <summary>Timekeeper for your tasks</summary>
   <description>
     <p>
-    	A simple, elegant, minimalist Pomodoro timer for your desktop. Designed to help you stay focused and productive, it offers a clean, distraction-free interface to manage work and break intervals with ease.
+      A simple, elegant, minimalist Pomodoro timer for your desktop. Designed to help you stay focused and productive, it offers a clean, distraction-free interface to manage work and break intervals with ease.
     </p>
+    <p>Features:</p>
+    <ul>
+      <li>Lightweight footprint.</li>
+      <li>Switch between Pomodoro (25 min), Short Break (5 min), and Long Break (20 min) routines.</li>
+      <li>Customizable working and break durations.</li>
+      <li>Skip the current session.</li>
+      <li>Timer audio notifications.</li>
+    </ul>
   </description>
 
   <developer id="tld.vendor">
@@ -21,8 +29,7 @@
   <url type="bugtracker">https://codeberg.org/lockedmutex/samaya/issues</url>
   <url type="translate">https://translate.codeberg.org/projects/samaya/</url>
   <url type="help">https://matrix.to/#/#samaya:matrix.org</url>
-  <!-- URLs of this type should point to a webpage showing information on how to donate to the described software project -->
-  <!-- <url type="donation">https://example.org/donate</url> -->
+  <url type="donation">https://ko-fi.com/lockedmutex</url>
   <!-- This could for example be an HTTPS URL to an online form or a page describing how to contact the developer -->
   <!-- <url type="contact">https://example.org/contact</url> -->
   <url type="contribute">https://codeberg.org/lockedmutex/samaya/src/branch/main/CONTRIBUTING.md</url>
@@ -62,6 +69,16 @@
   </screenshots>
 
   <releases>
+    <release version="1.1.0" date="2026-02-25">
+      <url type="details">https://codeberg.org/lockedmutex/samaya/releases/tag/1.1.0</url>
+      <description translate="no">
+        <p>Release Changelog:</p>
+        <ul>
+          <li>Add Finnish translations.</li>
+          <li>Modified application icon.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.0" date="2026-01-16">
       <url type="details">https://codeberg.org/lockedmutex/samaya/releases/tag/1.0.0</url>
       <description translate="no">
