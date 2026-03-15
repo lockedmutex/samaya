@@ -16,14 +16,8 @@ let
     graphene
     libepoxy
 
-    # Multimedia (GStreamer)
-    gst_all_1.gstreamer
-    gst_all_1.gst-plugins-base
-    gst_all_1.gst-plugins-bad
-
     # System & Graphics
     vulkan-loader
-    cups
     colord
     gsound
     libcanberra
@@ -38,6 +32,10 @@ let
     pkg-config
     dbus
     openssl_3
+    ninja
+    meson
+    desktop-file-utils
+    libxml2
   ];
 
 in
