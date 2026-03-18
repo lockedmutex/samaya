@@ -13,14 +13,14 @@
     <p>Features:</p>
     <ul>
       <li>Lightweight footprint.</li>
-      <li>Switch between Pomodoro (25 min), Short Break (5 min), and Long Break (20 min) routines.</li>
+      <li>Switch between Pomodoro, Short Break and Long Break routines.</li>
       <li>Customizable working and break durations.</li>
       <li>Skip the current session.</li>
-      <li>Timer audio notifications.</li>
+      <li>Timer completion notifications.</li>
     </ul>
   </description>
 
-  <developer id="tld.vendor">
+  <developer id="in.suyogtandel">
     <name>Suyog Tandel</name>
   </developer>
 

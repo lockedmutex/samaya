@@ -11,8 +11,13 @@ samaya_sources = [
 samaya_deps = [
     dependency('gtk4'),
     dependency('libadwaita-1', version : '>= 1.7'),
-    dependency('gsound'),
 ]
+
+if host_machine.system() == 'linux'
+    samaya_deps += dependency('gsound')
+else
+    samaya_deps += dependency('miniaudio')
+endif
 
 samaya_sources += gnome.compile_resources('samaya-resources', 'samaya.gresource.xml', c_name : 'samaya')
 

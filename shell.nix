@@ -15,6 +15,7 @@ let
     librsvg
     graphene
     libepoxy
+    mold
 
     # System & Graphics
     vulkan-loader
@@ -36,6 +37,7 @@ let
     meson
     desktop-file-utils
     libxml2
+    mold
   ];
 
 in

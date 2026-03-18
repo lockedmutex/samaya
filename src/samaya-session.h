@@ -21,7 +21,11 @@
 #pragma once
 
 #include <glib.h>
+#if defined(__linux__)
 #include <gsound.h>
+#else
+#include <miniaudio.h>
+#endif
 #include "samaya-timer.h"
 
 typedef enum
@@ -50,7 +54,11 @@ typedef struct
     GString *remaining_time_minutes_string;
 
     TimerPtr timer_instance;
+#if defined(__linux__)
     GSoundContext *gsound_ctx;
+#else
+    ma_engine *miniaudio_engine;
+#endif
 
     gpointer user_data;
 

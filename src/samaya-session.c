@@ -56,7 +56,11 @@ SessionManagerPtr sm_get_default(void)
  * Function Definitions
  * ============================================================================ */
 
+#if defined(__linux__)
 static void play_completion_sound(GSoundContext *g_sound_ctx);
+#else
+static void play_completion_sound(ma_engine *engine);
+#endif
 
 static void display_notification(SessionManagerPtr session_manager);
 
@@ -86,7 +90,11 @@ static void on_session_complete(gpointer notify)
     SessionManagerPtr session_manager = sm_get_default();
 
     if (notify != NULL) {
+#if defined(__linux__)
         play_completion_sound(session_manager->gsound_ctx);
+#else
+        play_completion_sound(session_manager->miniaudio_engine);
+#endif
         display_notification(session_manager);
     }
 
@@ -123,6 +131,7 @@ static void on_session_complete(gpointer notify)
     }
 }
 
+#if defined(__linux__)
 static void play_completion_sound(GSoundContext *g_sound_ctx)
 {
     if (!g_sound_ctx) {
@@ -131,10 +140,22 @@ static void play_completion_sound(GSoundContext *g_sound_ctx)
     }
 
     char *sound_path = g_build_filename("/app", "share", "sounds", "bell.oga", NULL);
-
-    gsound_context_play_full(g_sound_ctx, NULL, NULL, NULL, GSOUND_ATTR_MEDIA_FILENAME, sound_path,
-                             NULL);
+    gsound_context_play_full(g_sound_ctx, NULL, NULL, NULL, GSOUND_ATTR_MEDIA_FILENAME, sound_path, NULL);
+    g_free(sound_path);
 }
+#else
+static void play_completion_sound(ma_engine *engine)
+{
+    if (!engine) {
+        g_warning("Failed to play completion sound, miniaudio engine is not set.");
+        return;
+    }
+
+    char *sound_path = g_build_filename("/app", "share", "sounds", "bell.oga", NULL);
+    ma_engine_play_sound(engine, sound_path, NULL);
+    g_free(sound_path);
+}
+#endif
 
 static void display_notification(SessionManagerPtr session_manager)
 {
@@ -208,7 +229,11 @@ SessionManagerPtr sm_init(guint16 sessions_to_complete, gdouble work_duration,
         .remaining_time_minutes_string = g_string_new(NULL),
 
         .timer_instance = tm_new(work_duration, on_session_complete, on_timer_tick, NULL),
+#if defined(__linux__)
         .gsound_ctx = gsound_context_new(NULL, NULL),
+#else
+        .miniaudio_engine = g_new0(ma_engine, 1),
+#endif
 
         .user_data = user_data,
 
@@ -216,6 +241,13 @@ SessionManagerPtr sm_init(guint16 sessions_to_complete, gdouble work_duration,
     };
     sm_format_time(session_manager, session_manager->timer_instance->initial_time_ms);
     globalSessionManagerPtr = session_manager;
+
+#if !defined(__linux__)
+    if (ma_engine_init(NULL, session_manager->miniaudio_engine) != MA_SUCCESS) {
+        g_warning("Failed to initialize miniaudio engine.");
+    }
+#endif
+
     return session_manager;
 }
 
@@ -226,6 +258,11 @@ void sm_deinit(SessionManager *session_manager)
     if (timer) {
         tm_free(session_manager->timer_instance);
     }
+
+#if !defined(__linux__)
+    ma_engine_uninit(session_manager->miniaudio_engine);
+    g_free(session_manager->miniaudio_engine);
+#endif
 
     globalSessionManagerPtr = NULL;
 

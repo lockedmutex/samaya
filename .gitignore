@@ -4,6 +4,7 @@
 .zed/*
 !.vscode/tasks.json
 !.vscode/launch.json
+!.vscode/settings.json
 !.zed/tasks.json
 !.zed/settings.json
 .buildconfig
@@ -38,3 +39,4 @@ builddir_release
 # misc:
 po/README.md
 .flatpak/meson.sh
+.direnv
