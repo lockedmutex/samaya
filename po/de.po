@@ -3,19 +3,8 @@
 # This file is distributed under the same license as the samaya package.
 # Suyog Tandel <suyogtandel@proton.me>, 2025.
 #
-#, fuzzy
 msgid ""
-msgstr ""
-"Project-Id-Version: samaya\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-14 18:38+0530\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+msgstr "Project-Id-Version: samaya\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2025-12-14 18:38+0530\nPO-Revision-Date: 2026-03-22 22:29+0000\nLast-Translator: mondstern <mondstern@noreply.codeberg.org>\nLanguage-Team: German <https://translate.codeberg.org/projects/samaya/samaya/de/>\nLanguage: de\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.16.2\n"
 
 #: data/io.github.redddfoxxyy.samaya.desktop.in:2
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:7
@@ -50,12 +39,12 @@ msgstr ""
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:70
 #: src/preferences-dialog.ui:30 src/samaya-window.ui:49
 msgid "Short Break"
-msgstr ""
+msgstr "Kurze Pause"
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:74
 #: src/preferences-dialog.ui:45 src/samaya-window.ui:55
 msgid "Long Break"
-msgstr ""
+msgstr "Lange Pause"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:6
 msgid "Work session duration"
