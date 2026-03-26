@@ -69,6 +69,16 @@
   </screenshots>
 
   <releases>
+    <release version="1.2.0" date="2026-03-26">
+      <url type="details">https://codeberg.org/lockedmutex/samaya/releases/tag/1.2.0</url>
+      <description translate="no">
+        <p>Release Changelog:</p>
+        <ul>
+          <li>Add German translations.</li>
+          <li>Update flatpak runtime.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.1.0" date="2026-02-25">
       <url type="details">https://codeberg.org/lockedmutex/samaya/releases/tag/1.1.0</url>
       <description translate="no">

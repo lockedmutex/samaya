@@ -32,6 +32,11 @@ install_data(
   install_dir: get_option('datadir') / 'glib-2.0' / 'schemas',
 )
 
+install_data(
+  '../COPYING',
+  install_dir: get_option('datadir') / 'licenses' / 'io.github.redddfoxxyy.samaya'
+)
+
 install_data('sounds/bell.oga', install_dir: get_option('datadir') / 'sounds')
 
 compile_schemas = find_program('glib-compile-schemas', required: false, disabler: true)
