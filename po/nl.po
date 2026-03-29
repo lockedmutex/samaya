@@ -4,7 +4,7 @@
 # Suyog Tandel <suyogtandel@proton.me>, 2025.
 #
 msgid ""
-msgstr "Project-Id-Version: samaya\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2025-12-14 18:38+0530\nPO-Revision-Date: 2025-12-29 12:21+0000\nLast-Translator: Vistaus <vistaus@noreply.codeberg.org>\nLanguage-Team: Dutch <https://translate.codeberg.org/projects/samaya/samaya/nl/>\nLanguage: nl\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.15.1\n"
+msgstr "Project-Id-Version: samaya\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2025-12-14 18:38+0530\nPO-Revision-Date: 2026-03-29 18:57+0000\nLast-Translator: flipflop97 <flipflop97@noreply.codeberg.org>\nLanguage-Team: Dutch <https://translate.codeberg.org/projects/samaya/samaya/nl/>\nLanguage: nl\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.16.2\n"
 
 #: data/io.github.redddfoxxyy.samaya.desktop.in:2
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:7
@@ -18,14 +18,14 @@ msgstr "Productiviteit;Pomodoro;Tijdklok;Timer;Tijd;Tracker;Bijhouden;"
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:8
 msgid "Timekeeper for your tasks"
-msgstr "Houd je taken planmatig bij"
+msgstr "Houd uw taken planmatig bij"
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:10
 msgid ""
 "A simple, elegant, minimalist Pomodoro timer for your desktop. Designed to "
 "help you stay focused and productive, it offers a clean, distraction-free "
 "interface to manage work and break intervals with ease."
-msgstr "Een eenvoudige, elegante, minimalistische Pomodoro-tijdklok voor je computer. Blijf gefocust en productief met deze afleidingsvrije toepassing om je werk en pauzes bij te houden."
+msgstr "Een eenvoudige, elegante, minimalistische Pomodoro-tijdklok voor uw computer. Blijf gefocust en productief met deze afleidings­vrije app om uw werk en pauzes bij te houden."
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:16
 #: src/samaya-application.c:54 src/samaya-application.c:67
@@ -34,7 +34,7 @@ msgstr "Suyog Tandel"
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:66
 msgid "Work Session"
-msgstr "Werksessie"
+msgstr "Werk­sessie"
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:70
 #: src/preferences-dialog.ui:30 src/samaya-window.ui:49
@@ -48,11 +48,11 @@ msgstr "Lange pauze"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:6
 msgid "Work session duration"
-msgstr "Duur van werksessies"
+msgstr "Duur van werk­sessies"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:7
 msgid "Duration of work sessions in minutes"
-msgstr "Duur van werksessies (in minuten)"
+msgstr "Duur van werk­sessies (in minuten)"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:11
 msgid "Short break duration"
@@ -72,7 +72,7 @@ msgstr "Duur van lange pauzes (in minuten)"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:21
 msgid "Sessions before long break"
-msgstr "Aantal sessies voorafgaand aan lange pauze"
+msgstr "Aantal sessies vooraf­gaand aan lange pauze"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:22
 msgid "Number of work sessions to complete before a long break"
@@ -85,20 +85,20 @@ msgstr "Pauzes automatisch starten"
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:27
 msgid ""
 "Whether to automatically start the break timer when a work session ends."
-msgstr "Start de pauzeklok automatisch na het afronden van een werksessie."
+msgstr "Start de pauze­klok automatisch na het afronden van een werk­sessie."
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:31
 msgid "Auto-start work sessions"
-msgstr "Werksessies automatisch starten"
+msgstr "Werk­sessies automatisch starten"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:32
 msgid ""
 "Whether to automatically start the work timer when a break session ends."
-msgstr "Start de prikklok automatisch na het beëindigen van een pauze."
+msgstr "Start de prik­klok automatisch na het beëindigen van een pauze."
 
 #: src/preferences-dialog.ui:10
 msgid "Timer Durations"
-msgstr "Duur van tijdklokken"
+msgstr "Duur van tijd­klokken"
 
 #: src/preferences-dialog.ui:11
 msgid "Set the duration (in minutes) for each routine."
@@ -110,15 +110,15 @@ msgstr "Werk"
 
 #: src/preferences-dialog.ui:63
 msgid "Session Cycle"
-msgstr "Sessiecyclus"
+msgstr "Sessie­cyclus"
 
 #: src/preferences-dialog.ui:66
 msgid "Sessions before Long Break"
-msgstr "Aantal sessies voorafgaand aan lange pauze"
+msgstr "Aantal sessies vooraf­gaand aan lange pauze"
 
 #: src/preferences-dialog.ui:82
 msgid "Transition Flow"
-msgstr "Overgangsroutine"
+msgstr "Overgangs­routine"
 
 #: src/preferences-dialog.ui:85
 msgid "Auto Start Breaks"
@@ -126,15 +126,15 @@ msgstr "Pauzes automatisch starten"
 
 #: src/preferences-dialog.ui:86
 msgid "Automatically start break routine after work session ends."
-msgstr "Start de pauzeroutine automatisch na het afronden van een werksessie."
+msgstr "Start de pauze­routine automatisch na het afronden van een werk­sessie."
 
 #: src/preferences-dialog.ui:92
 msgid "Auto Start Work"
-msgstr "Werksessies automatisch starten"
+msgstr "Werk­sessies automatisch starten"
 
 #: src/preferences-dialog.ui:93
 msgid "Automatically start work routine after break ends."
-msgstr "Start de werkroutine automatisch na het beëndigen van een pauze."
+msgstr "Start de werk­routine automatisch na het beëndigen van een pauze."
 
 #: src/samaya-application.c:68
 msgid "translator-credits"
@@ -154,7 +154,7 @@ msgstr "Hervatten"
 
 #: src/samaya-window.c:233
 msgid "Reset Timer"
-msgstr "Tijdklok op nul zetten"
+msgstr "Tijd­klok op nul zetten"
 
 #: src/samaya-window.c:239 src/samaya-window.ui:141
 msgid "Start"
@@ -162,7 +162,7 @@ msgstr "Starten"
 
 #: src/samaya-session.c:149
 msgid "Focus session complete! Time for a break."
-msgstr "De werksessie is afgerond! Tijd voor een pauze."
+msgstr "De werk­sessie is afgerond! Tijd voor een pauze."
 
 #: src/samaya-session.c:153
 msgid "Break over! Time to get back to work."
@@ -170,11 +170,11 @@ msgstr "De pauze is voorbij! Tijd om terug aan het werk te gaan."
 
 #: src/samaya-session.c:156
 msgid "Timer finished."
-msgstr "De tijdklok is verstreken."
+msgstr "De tijd­klok is verstreken."
 
 #: src/samaya-window.ui:19
 msgid "Main Menu"
-msgstr "Hoofdmenu"
+msgstr "Hoofd­menu"
 
 #: src/samaya-window.ui:43
 msgid "Pomodoro"
@@ -186,11 +186,11 @@ msgstr "Herstellen"
 
 #: src/samaya-window.ui:173
 msgid "_Preferences"
-msgstr "_Voorkeuren"
+msgstr "_Voor­keuren"
 
 #: src/samaya-window.ui:177
 msgid "_Keyboard Shortcuts"
-msgstr "_Sneltoetsen"
+msgstr "_Snel­toetsen"
 
 #: src/samaya-window.ui:181
 msgid "_About Samaya"
@@ -198,17 +198,17 @@ msgstr "Over S_amaya"
 
 #: src/shortcuts-dialog.ui:6
 msgid "Shortcuts"
-msgstr "Sneltoetsen"
+msgstr "Snel­toetsen"
 
 #: src/shortcuts-dialog.ui:9
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr "Sneltoetsen tonen"
+msgstr "Snel­toetsen tonen"
 
 #: src/shortcuts-dialog.ui:15
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr "Voorkeuren openen"
+msgstr "Voor­keuren openen"
 
 #: src/shortcuts-dialog.ui:21
 msgctxt "shortcut window"
