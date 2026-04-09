@@ -3,40 +3,29 @@
 # This file is distributed under the same license as the samaya package.
 # Suyog Tandel <suyogtandel@proton.me>, 2025.
 #
-#, fuzzy
 msgid ""
-msgstr ""
-"Project-Id-Version: samaya\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-14 18:38+0530\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+msgstr "Project-Id-Version: samaya\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2025-12-14 18:38+0530\nPO-Revision-Date: 2026-04-09 17:57+0000\nLast-Translator: gallegonovato <gallegonovato@noreply.codeberg.org>\nLanguage-Team: Spanish <https://translate.codeberg.org/projects/samaya/samaya/es/>\nLanguage: es\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.16.2\n"
 
 #: data/io.github.redddfoxxyy.samaya.desktop.in:2
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:7
 #: src/samaya-application.c:65 src/samaya-session.c:144 src/samaya-window.ui:6
 msgid "Samaya"
-msgstr ""
+msgstr "Samaya"
 
 #: data/io.github.redddfoxxyy.samaya.desktop.in:8
 msgid "Productivity;Pomodoro;Timer;Time;Tracker;"
-msgstr ""
+msgstr "Productividad; Pomodoro; Temporizador; Tiempo; Registro del tiempo;"
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:8
 msgid "Timekeeper for your tasks"
-msgstr ""
+msgstr "Un cronómetro para tus tareas"
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:10
 msgid ""
 "A simple, elegant, minimalist Pomodoro timer for your desktop. Designed to "
 "help you stay focused and productive, it offers a clean, distraction-free "
 "interface to manage work and break intervals with ease."
-msgstr ""
+msgstr "Un temporizador Pomodoro sencillo, elegante y minimalista para tu escritorio. Diseñado para ayudarte a mantener la concentración y la productividad, ofrece una interfaz limpia y sin distracciones que te permite gestionar con facilidad los intervalos de trabajo y descanso."
 
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:16
 #: src/samaya-application.c:54 src/samaya-application.c:67
