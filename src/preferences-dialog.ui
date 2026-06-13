@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 1.0.2 -->
 <interface>
+  <!-- interface-name preferences-dialog.ui -->
   <requires lib="gtk" version="4.20"/>
   <requires lib="libadwaita" version="1.8"/>
   <template class="SamayaPreferencesDialog" parent="AdwPreferencesDialog">
@@ -9,7 +11,6 @@
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Timer Durations</property>
             <property name="description" translatable="yes">Set the duration (in minutes) for each routine.</property>
-            
             <child>
               <object class="AdwSpinRow" id="work_duration_row">
                 <property name="title" translatable="yes">Work</property>
@@ -24,7 +25,6 @@
                 <signal name="notify::value" handler="on_work_duration_changed" swapped="no"/>
               </object>
             </child>
-
             <child>
               <object class="AdwSpinRow" id="short_break_row">
                 <property name="title" translatable="yes">Short Break</property>
@@ -39,7 +39,6 @@
                 <signal name="notify::value" handler="on_short_break_changed" swapped="no"/>
               </object>
             </child>
-
             <child>
               <object class="AdwSpinRow" id="long_break_row">
                 <property name="title" translatable="yes">Long Break</property>
@@ -54,10 +53,8 @@
                 <signal name="notify::value" handler="on_long_break_changed" swapped="no"/>
               </object>
             </child>
-
           </object>
         </child>
-
         <child>
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Session Cycle</property>
@@ -76,7 +73,6 @@
             </child>
           </object>
         </child>
-
         <child>
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Transition Flow</property>

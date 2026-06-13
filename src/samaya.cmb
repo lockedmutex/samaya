@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
+<!-- Created with Cambalache 1.0.2 -->
+<cambalache-project version="1.0.0" target_tk="gtk-4.0" depends="casilda-1.0,libadwaita-1,webkitgtk-6.0">
+  <gresources filename="samaya.gresource.xml" sha256="d155084a51f8b4a944bc0d82f3c9341b0b3b597f7b36c4e0e5f02b287b3a5349"/>
+  <css priority="600" is_global="1" filename="samaya-style.css" sha256="70db6166eb81f0ba886053b5e1572a8e8427d4f4a3ac1d49fa39fcd7fb94daef"/>
+  <ui template-class="SamayaPreferencesDialog" filename="preferences-dialog.ui" sha256="bfd7c2e7e38279bf66a98b77c7f2c4c9985743fb5b16205e8c8a873aa0b9dd74"/>
+  <ui template-class="SamayaWindow" filename="samaya-window.ui" sha256="4e8f581eec534cc9afc1d47562fa7efad23b703e95ed6e77e4094fbe008fca64"/>
+  <ui filename="shortcuts-dialog.ui" sha256="5b86e9beb40f8b7ac58a25ed842c2a55934a8a451bedbef9344dd746167f0e99"/>
+</cambalache-project>

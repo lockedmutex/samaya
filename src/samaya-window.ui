@@ -1,190 +1,180 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 1.0.2 -->
 <interface>
-    <requires lib="gtk" version="4.0" />
-    <requires lib="Adw" version="1.0" />
-    <template class="SamayaWindow" parent="AdwApplicationWindow">
-        <property name="title" translatable="yes">Samaya</property>
-        <property name="default-width">360</property>
-        <property name="default-height">480</property>
-        <property name="width-request">360</property>
-        <property name="height-request">480</property>
+  <!-- interface-name samaya-window.ui -->
+  <requires lib="Adw" version="1.8"/>
+  <requires lib="gtk" version="4.20"/>
+  <requires lib="gio" version="2.0"/>
+  <template class="SamayaWindow" parent="AdwApplicationWindow">
+    <property name="title" translatable="yes">Samaya</property>
+    <property name="default-width">360</property>
+    <property name="default-height">480</property>
+    <property name="width-request">360</property>
+    <property name="height-request">480</property>
+    <property name="content">
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar">
+            <child type="end">
+              <object class="GtkMenuButton">
+                <property name="primary">True</property>
+                <property name="icon-name">open-menu-symbolic</property>
+                <property name="tooltip-text" translatable="yes">Main Menu</property>
+                <property name="menu-model">primary_menu</property>
+              </object>
+            </child>
+          </object>
+        </child>
         <property name="content">
-            <object class="AdwToolbarView">
-                <child type="top">
-                    <object class="AdwHeaderBar">
-                        <child type="end">
-                            <object class="GtkMenuButton">
-                                <property name="primary">True</property>
-                                <property name="icon-name">open-menu-symbolic</property>
-                                <property name="tooltip-text" translatable="yes">Main Menu</property>
-                                <property name="menu-model">primary_menu</property>
-                            </object>
-                        </child>
-                    </object>
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <!-- Routine Toggle Bar -->
+            <child>
+              <object class="GtkBox" id="routine_switch_box">
+                <property name="halign">center</property>
+                <property name="margin-top">8</property>
+                <child>
+                  <object class="AdwToggleGroup" id="routine_toggle_group">
+                    <property name="active-name">pomodoro</property>
+                    <style>
+                      <class name="round"/>
+                    </style>
+                    <child>
+                      <object class="AdwToggle">
+                        <property name="label" translatable="yes">Pomodoro</property>
+                        <property name="name">pomodoro</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwToggle">
+                        <property name="label" translatable="yes">Short Break</property>
+                        <property name="name">short-break</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwToggle">
+                        <property name="label" translatable="yes">Long Break</property>
+                        <property name="name">long-break</property>
+                      </object>
+                    </child>
+                  </object>
                 </child>
-
-                <property name="content">
-                    <object class="GtkBox">
+              </object>
+            </child>
+            <!-- Timer and Sessions Label and, Progress Circle -->
+            <child>
+              <object class="GtkBox">
+                <property name="valign">center</property>
+                <property name="halign">center</property>
+                <property name="vexpand">true</property>
+                <child>
+                  <object class="GtkOverlay">
+                    <!-- Progress Circle -->
+                    <child>
+                      <object class="GtkDrawingArea" id="progress_circle">
+                        <property name="width-request">280</property>
+                        <property name="height-request">280</property>
+                      </object>
+                    </child>
+                    <child type="overlay">
+                      <object class="GtkBox">
                         <property name="orientation">vertical</property>
-
-                        <!-- Routine Toggle Bar -->
+                        <property name="valign">center</property>
+                        <property name="halign">center</property>
+                        <property name="spacing">0</property>
+                        <!-- Dummy Label so that the timer label is centered (Hacky will fix later) -->
                         <child>
-                            <object class="GtkBox" id="routine_switch_box">
-                                <property name="halign">center</property>
-                                <property name="margin-top">8</property>
-                                <child>
-                                    <object class="AdwToggleGroup" id="routine_toggle_group">
-                                        <property name="active-name">pomodoro</property>
-                                        <style>
-                                            <class name="round" />
-                                        </style>
-                                        <child>
-                                            <object class="AdwToggle">
-                                                <property name="label" translatable="yes">Pomodoro</property>
-                                                <property name="name">pomodoro</property>
-                                            </object>
-                                        </child>
-                                        <child>
-                                            <object class="AdwToggle">
-                                                <property name="label" translatable="yes">Short Break</property>
-                                                <property name="name">short-break</property>
-                                            </object>
-                                        </child>
-                                        <child>
-                                            <object class="AdwToggle">
-                                                <property name="label" translatable="yes">Long Break</property>
-                                                <property name="name">long-break</property>
-                                            </object>
-                                        </child>
-                                    </object>
-                                </child>
-                            </object>
+                          <object class="GtkLabel">
+                            <property name="label">#0</property>
+                            <property name="opacity">0</property>
+                            <property name="margin-bottom">4</property>
+                            <style>
+                              <class name="title-4"/>
+                            </style>
+                          </object>
                         </child>
-
-                        <!-- Timer and Sessions Label and, Progress Circle -->
+                        <!-- Timer Label -->
                         <child>
-                            <object class="GtkBox">
-                                <property name="valign">center</property>
-                                <property name="halign">center</property>
-                                <property name="vexpand">true</property>
-                                <child>
-                                    <object class="GtkOverlay">
-
-                                        <!-- Progress Circle -->
-                                        <child>
-                                            <object class="GtkDrawingArea" id="progress_circle">
-                                                <property name="width-request">280</property>
-                                                <property name="height-request">280</property>
-                                            </object>
-                                        </child>
-
-                                        <child type="overlay">
-                                            <object class="GtkBox">
-                                                <property name="orientation">vertical</property>
-                                                <property name="valign">center</property>
-                                                <property name="halign">center</property>
-                                                <property name="spacing">0</property>
-
-                                                <!-- Dummy Label so that the timer label is centered (Hacky will fix later) -->
-                                                <child>
-                                                    <object class="GtkLabel">
-                                                        <property name="label">#0</property>
-                                                        <property name="opacity">0</property>
-                                                        <property name="margin-bottom">4</property>
-                                                        <style>
-                                                            <class name="title-4" />
-                                                        </style>
-                                                    </object>
-                                                </child>
-
-                                                <!-- Timer Label -->
-                                                <child>
-                                                    <object class="GtkLabel" id="timer_label">
-                                                        <property name="label">25:00</property>
-                                                        <property name="halign">center</property>
-                                                        <style>
-                                                            <class name="numeric" />
-                                                            <class name="title-1" />
-                                                        </style>
-                                                        <attributes>
-                                                            <attribute name="scale" value="2.2" />
-                                                        </attributes>
-                                                    </object>
-                                                </child>
-
-                                                <!-- Total Sessions Label -->
-                                                <child>
-                                                    <object class="GtkLabel" id="sessions_label">
-                                                        <property name="label">#0</property>
-                                                        <property name="halign">center</property>
-                                                        <property name="margin-top">4</property>
-                                                        <style>
-                                                            <class name="title-4" />
-                                                            <class name="dim-label" />
-                                                        </style>
-                                                    </object>
-                                                </child>
-
-                                            </object>
-                                        </child>
-
-                                    </object>
-                                </child>
-                            </object>
+                          <object class="GtkLabel" id="timer_label">
+                            <property name="label">25:00</property>
+                            <property name="halign">center</property>
+                            <style>
+                              <class name="numeric"/>
+                              <class name="title-1"/>
+                            </style>
+                            <attributes>
+                              <attribute name="scale" value="2.2"/>
+                            </attributes>
+                          </object>
                         </child>
-
-                        <!-- Start and Reset Buttons -->
+                        <!-- Total Sessions Label -->
                         <child>
-                            <object class="GtkBox">
-                                <property name="orientation">horizontal</property>
-                                <property name="spacing">12</property>
-                                <property name="halign">center</property>
-                                <property name="margin-bottom">24</property>
-                                <child>
-                                    <object class="GtkButton" id="start_button">
-                                        <property name="label" translatable="yes">Start</property>
-                                        <property name="action-name">win.start-timer</property>
-                                        <style>
-                                            <class name="pill" />
-                                            <class name="suggested-action" />
-                                        </style>
-                                    </object>
-                                </child>
-                                <child>
-                                    <object class="GtkButton" id="reset_button">
-                                        <property name="label" translatable="yes">Reset</property>
-                                        <property name="action-name">win.reset-timer</property>
-                                        <property name="width-request">44</property>
-                                        <property name="height-request">44</property>
-                                        <style>
-                                            <class name="circular" />
-                                            <class name="destructive-action" />
-                                        </style>
-                                    </object>
-                                </child>
-                            </object>
+                          <object class="GtkLabel" id="sessions_label">
+                            <property name="label">#0</property>
+                            <property name="halign">center</property>
+                            <property name="margin-top">4</property>
+                            <style>
+                              <class name="title-4"/>
+                              <class name="dim-label"/>
+                            </style>
+                          </object>
                         </child>
-                    </object>
-                </property>
-            </object>
-
-
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <!-- Start and Reset Buttons -->
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="spacing">12</property>
+                <property name="halign">center</property>
+                <property name="margin-bottom">24</property>
+                <child>
+                  <object class="GtkButton" id="start_button">
+                    <property name="label" translatable="yes">Start</property>
+                    <property name="action-name">win.start-timer</property>
+                    <style>
+                      <class name="pill"/>
+                      <class name="suggested-action"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="reset_button">
+                    <property name="label" translatable="yes">Reset</property>
+                    <property name="action-name">win.reset-timer</property>
+                    <property name="width-request">44</property>
+                    <property name="height-request">44</property>
+                    <style>
+                      <class name="circular"/>
+                      <class name="destructive-action"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
         </property>
-    </template>
-    <menu id="primary_menu">
-        <section>
-            <item>
-                <attribute name="label" translatable="yes">_Preferences</attribute>
-                <attribute name="action">app.preferences</attribute>
-            </item>
-            <item>
-                <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
-                <attribute name="action">app.shortcuts</attribute>
-            </item>
-            <item>
-                <attribute name="label" translatable="yes">_About Samaya</attribute>
-                <attribute name="action">app.about</attribute>
-            </item>
-        </section>
-    </menu>
+      </object>
+    </property>
+  </template>
+  <menu id="primary_menu">
+    <section>
+      <item>
+        <attribute name="action">app.preferences</attribute>
+        <attribute name="label" translatable="yes">_Preferences</attribute>
+      </item>
+      <item>
+        <attribute name="action">app.shortcuts</attribute>
+        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
+      </item>
+      <item>
+        <attribute name="action">app.about</attribute>
+        <attribute name="label" translatable="yes">_About Samaya</attribute>
+      </item>
+    </section>
+  </menu>
 </interface>
