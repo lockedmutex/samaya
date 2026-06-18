@@ -14,6 +14,12 @@ i18n = import('i18n')
 gnome = import('gnome')
 cc = meson.get_compiler('c')
 
+mold = find_program('mold', required: false)
+if mold.found()
+	add_project_link_arguments('-fuse-ld=mold', language: 'c')
+endif
+
+
 config_h = configuration_data()
 config_h.set_quoted('PACKAGE_VERSION', meson.project_version())
 config_h.set_quoted('GETTEXT_PACKAGE', 'samaya')
