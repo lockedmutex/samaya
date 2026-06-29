@@ -4,33 +4,33 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: samaya\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2025-12-15 19:03+0530\nPO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\nLast-Translator: Automatically generated\nLanguage-Team: none\nLanguage: cs\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+msgstr "Project-Id-Version: samaya\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2025-12-15 19:03+0530\nPO-Revision-Date: 2026-06-29 21:07+0000\nLast-Translator: p-bo <p-bo@noreply.codeberg.org>\nLanguage-Team: Czech <https://translate.codeberg.org/projects/samaya/samaya/cs/>\nLanguage: cs\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\nX-Generator: Weblate 2026.6.1\n"
 
 #: data/io.github.redddfoxxyy.samaya.desktop.in:2
 #: data/io.github.redddfoxxyy.samaya.metainfo.xml.in:7
 #: src/samaya-application.c:67 src/samaya-session.c:146 src/samaya-window.ui:6
 msgid "Samaya"
-msgstr ""
+msgstr "Samaya"
 
 #: data/io.github.redddfoxxyy.samaya.desktop.in:8
 msgid "Productivity;Pomodoro;Timer;Time;Tracker;"
-msgstr ""
+msgstr "Produktivita;Pomodoro;Časovač;Čas;Sledovač;"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:6
 msgid "Work session duration"
-msgstr ""
+msgstr "Doba trvání pracovní relace"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:7
 msgid "Duration of work sessions in minutes"
-msgstr ""
+msgstr "Doba trvání pracovních relací (v minutách)"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:11
 msgid "Short break duration"
-msgstr ""
+msgstr "Doba trvání krátké přestávky"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:12
 msgid "Duration of short breaks in minutes"
-msgstr ""
+msgstr "Doba trvání krátké přestávky (v minutách)"
 
 #: data/io.github.redddfoxxyy.samaya.gschema.xml:16
 msgid "Long break duration"
